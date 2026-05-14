@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FixYa — Lo necesitas. Lo resolvemos. Ya.</title>
+  <meta name="description" content="FixYa conecta hogares y empresas con técnicos verificados en Tegucigalpa. Servicios técnicos a domicilio, rápidos y confiables."/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --blue:#1A56DB;--blue-d:#1E3A5F;--blue-l:#EBF2FF;--blue-m:#2563EB;
+      --gold:#F5A623;--gold-d:#D4891A;--gold-l:#FFF8E7;
+      --white:#fff;--off:#F8FAFC;--gray:#E2E8F0;
+      --t1:#0F172A;--t2:#334155;--t3:#64748B;
+      --green:#25D366;--green-d:#1ebe5d;
+      --r:12px;--r-lg:20px;
+      --sh:0 4px 20px rgba(0,0,0,.08);--sh-lg:0 16px 48px rgba(0,0,0,.14);
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;color:var(--t1);background:var(--white);overflow-x:hidden}
+
+    /* ═══════════ NAV ═══════════ */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:200;
+      background:rgba(255,255,255,.96);backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--gray);
+      height:68px;display:flex;align-items:center;justify-content:space-between;
+      padding:0 5%;transition:box-shadow .3s;
+    }
+    nav.scrolled{box-shadow:var(--sh)}
+    .nav-logo{text-decoration:none;display:flex;align-items:center;gap:2px}
+    .logo-fix{font-size:1.7rem;font-weight:900;color:var(--t1);letter-spacing:-1.5px}
+    .logo-ya{font-size:1.7rem;font-weight:900;color:var(--gold);letter-spacing:-1.5px}
+    .nav-center{display:flex;gap:2rem;list-style:none}
+    .nav-center a{text-decoration:none;color:var(--t2);font-weight:500;font-size:.93rem;transition:color .2s}
+    .nav-center a:hover,.nav-center a.active{color:var(--blue)}
+    .nav-right{display:flex;align-items:center;gap:.8rem}
+    .nav-wa{
+      display:flex;align-items:center;gap:.5rem;
+      background:var(--green);color:#fff;
+      padding:.55rem 1.2rem;border-radius:50px;
+      font-weight:700;font-size:.88rem;text-decoration:none;
+      transition:all .2s;white-space:nowrap;
+    }
+    .nav-wa:hover{background:var(--green-d);transform:translateY(-1px);box-shadow:0 6px 16px rgba(37,211,102,.35)}
+    /* Hamburger */
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+    .hamburger span{display:block;width:24px;height:2.5px;background:var(--t1);border-radius:2px;transition:all .3s}
+    .hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+    .mobile-menu{
+      display:none;position:fixed;top:68px;left:0;right:0;z-index:190;
+      background:#fff;border-bottom:2px solid var(--gray);
+      padding:1.5rem 5%;flex-direction:column;gap:1rem;
+      box-shadow:0 8px 32px rgba(0,0,0,.1);
+    }
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{text-decoration:none;color:var(--t1);font-weight:600;font-size:1.05rem;padding:.5rem 0;border-bottom:1px solid var(--gray)}
+    .mobile-menu a:last-child{border:none}
+    .mobile-wa{
+      display:flex;align-items:center;justify-content:center;gap:.6rem;
+      background:var(--green);color:#fff;padding:.9rem;border-radius:12px;
+      font-weight:700;font-size:1rem;text-decoration:none;margin-top:.5rem;
+    }
+
+    /* ═══════════ FLOATING WA ═══════════ */
+    .wa-float{
+      position:fixed;bottom:28px;right:24px;z-index:300;
+      display:flex;align-items:center;gap:.6rem;
+      background:var(--green);color:#fff;
+      padding:.85rem 1.4rem;border-radius:50px;
+      font-weight:700;font-size:1rem;text-decoration:none;
+      box-shadow:0 8px 28px rgba(37,211,102,.5);
+      transition:all .25s;animation:pulse-wa 2.5s infinite;
+    }
+    .wa-float:hover{background:var(--green-d);transform:translateY(-3px) scale(1.04);box-shadow:0 12px 36px rgba(37,211,102,.6);animation:none}
+    .wa-float i{font-size:1.3rem}
+    @keyframes pulse-wa{
+      0%,100%{box-shadow:0 8px 28px rgba(37,211,102,.5)}
+      50%{box-shadow:0 8px 36px rgba(37,211,102,.75),0 0 0 8px rgba(37,211,102,.15)}
+    }
+    @media(max-width:600px){
+      .wa-float{padding:.8rem 1rem;font-size:.9rem;bottom:20px;right:16px}
+      .wa-float .wa-label{display:none}
+    }
+
+    /* ═══════════ HERO ═══════════ */
+    .hero{
+      min-height:100vh;padding-top:68px;
+      background:linear-gradient(135deg,#0D1B2E 0%,#1A3660 45%,#1A56DB 100%);
+      position:relative;overflow:hidden;
+      display:flex;align-items:center;
+    }
+    .hero-bg{
+      position:absolute;inset:0;
+      background:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&q=75') center/cover;
+      opacity:.12;
+    }
+    /* Decorative circles */
+    .hero-circle1{position:absolute;width:600px;height:600px;border-radius:50%;background:rgba(26,86,219,.2);top:-200px;right:-100px;pointer-events:none}
+    .hero-circle2{position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(245,166,35,.1);bottom:-50px;left:5%;pointer-events:none}
+    .hero-inner{position:relative;z-index:1;width:100%;max-width:1200px;margin:0 auto;padding:5rem 5%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:.5rem;
+      background:rgba(245,166,35,.2);border:1px solid rgba(245,166,35,.4);
+      color:var(--gold);padding:.4rem 1rem;border-radius:50px;
+      font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+      margin-bottom:1.5rem;
+    }
+    .hero h1{font-size:clamp(2.4rem,4.5vw,3.8rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1.2rem;letter-spacing:-1px}
+    .hero h1 .accent{color:var(--gold);display:block}
+    .hero-sub{font-size:1.1rem;color:rgba(255,255,255,.78);line-height:1.7;margin-bottom:2.5rem;max-width:500px}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+    .btn-wa-hero{
+      display:inline-flex;align-items:center;gap:.6rem;
+      background:var(--green);color:#fff;
+      padding:1rem 2rem;border-radius:50px;
+      font-weight:800;font-size:1.05rem;text-decoration:none;
+      transition:all .2s;
+      box-shadow:0 8px 24px rgba(37,211,102,.4);
+    }
+    .btn-wa-hero:hover{background:var(--green-d);transform:translateY(-2px);box-shadow:0 12px 32px rgba(37,211,102,.5)}
+    .btn-outline{
+      display:inline-flex;align-items:center;gap:.6rem;
+      background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.35);
+      color:#fff;padding:1rem 2rem;border-radius:50px;
+      font-weight:600;font-size:1.05rem;text-decoration:none;
+      transition:all .2s;
+    }
+    .btn-outline:hover{background:rgba(255,255,255,.2)}
+    /* Hero stats */
+    .hero-stats{display:flex;gap:2rem;margin-top:3rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.15);flex-wrap:wrap}
+    .hstat strong{display:block;font-size:2.2rem;font-weight:900;color:var(--gold);line-height:1}
+    .hstat span{font-size:.8rem;color:rgba(255,255,255,.65);margin-top:.3rem;display:block}
+    /* Hero image */
+    .hero-img-wrap{position:relative}
+    .hero-img-wrap img{width:100%;border-radius:var(--r-lg);box-shadow:var(--sh-lg);aspect-ratio:4/3;object-fit:cover}
+    .hero-badge-card{
+      position:absolute;bottom:-20px;left:-20px;
+      background:#fff;border-radius:var(--r);padding:1rem 1.4rem;
+      box-shadow:var(--sh-lg);display:flex;align-items:center;gap:.8rem;
+      min-width:220px;
+    }
+    .hbc-icon{width:44px;height:44px;background:#DCFCE7;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .hbc-icon i{color:#15803D;font-size:1.2rem}
+    .hbc-text strong{display:block;font-size:.9rem;color:var(--t1);font-weight:700}
+    .hbc-text span{font-size:.75rem;color:var(--t3)}
+    .hero-badge-card2{
+      position:absolute;top:20px;right:-20px;
+      background:var(--blue-d);border-radius:var(--r);padding:.9rem 1.2rem;
+      box-shadow:var(--sh-lg);display:flex;align-items:center;gap:.7rem;
+    }
+    .hbc2-icon{font-size:1.4rem;color:var(--gold)}
+    .hbc2-text strong{display:block;font-size:.85rem;color:#fff;font-weight:700}
+    .hbc2-text span{font-size:.72rem;color:rgba(255,255,255,.65)}
+
+    /* ═══════════ TRUST STRIP ═══════════ */
+    .trust{background:var(--blue-d);padding:1.8rem 5%}
+    .trust-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-around;flex-wrap:wrap;gap:1.5rem}
+    .ti{display:flex;align-items:center;gap:.7rem;color:rgba(255,255,255,.85);font-size:.88rem;font-weight:500}
+    .ti i{color:var(--gold);font-size:1.1rem}
+
+    /* ═══════════ SHARED SECTION ═══════════ */
+    .sec{padding:5.5rem 5%}
+    .sec-alt{background:var(--off)}
+    .container{max-width:1200px;margin:0 auto}
+    .sec-label{display:inline-flex;align-items:center;gap:.4rem;background:var(--blue-l);color:var(--blue);padding:.35rem .9rem;border-radius:50px;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem}
+    .sec-title{font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:900;line-height:1.15;color:var(--t1);letter-spacing:-.5px}
+    .sec-sub{color:var(--t3);font-size:1rem;line-height:1.75;margin-top:.8rem;max-width:580px}
+
+    /* ═══════════ WHY ═══════════ */
+    .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-top:3.5rem}
+    .why-card{
+      background:var(--white);border-radius:var(--r);padding:2rem 1.6rem;
+      border:1.5px solid var(--gray);transition:all .25s;position:relative;overflow:hidden;
+    }
+    .why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--blue-m));transform:scaleX(0);transition:transform .3s;transform-origin:left}
+    .why-card:hover::before{transform:scaleX(1)}
+    .why-card:hover{border-color:var(--blue);box-shadow:var(--sh-lg);transform:translateY(-6px)}
+    .wc-icon{width:56px;height:56px;border-radius:14px;background:var(--blue-l);display:flex;align-items:center;justify-content:center;margin-bottom:1.3rem}
+    .wc-icon i{color:var(--blue);font-size:1.35rem}
+    .why-card h3{font-size:1rem;font-weight:700;margin-bottom:.5rem;color:var(--t1)}
+    .why-card p{font-size:.87rem;color:var(--t3);line-height:1.65}
+
+    /* ═══════════ SERVICES ═══════════ */
+    .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-top:3.5rem}
+    .svc-card{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh);transition:all .25s;background:var(--white)}
+    .svc-card:hover{transform:translateY(-8px);box-shadow:var(--sh-lg)}
+    .svc-card-img{position:relative;overflow:hidden;height:220px;display:flex;align-items:center;justify-content:center}
+    .svc-card-img .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.4),transparent)}
+    .svc-badge{position:absolute;top:12px;left:12px;padding:.28rem .75rem;border-radius:50px;font-size:.7rem;font-weight:700;text-transform:uppercase;z-index:2}
+    .badge-on{background:#DCFCE7;color:#15803D}
+    .badge-soon{background:rgba(255,255,255,.9);color:var(--t3)}
+    .svc-bg-icon{font-size:6rem;color:rgba(255,255,255,.18);position:absolute;z-index:1}
+    .gr-blue{background:linear-gradient(135deg,#0D1B2E 0%,#1A56DB 100%)}
+    .gr-blue2{background:linear-gradient(135deg,#0F2044 0%,#2563EB 100%)}
+    .gr-teal{background:linear-gradient(135deg,#064E3B 0%,#0D9488 100%)}
+    .gr-teal2{background:linear-gradient(135deg,#134E4A 0%,#0F766E 100%)}
+    .gr-steel{background:linear-gradient(135deg,#0C2340 0%,#0369A1 100%)}
+    .gr-dark{background:linear-gradient(135deg,#1C1917 0%,#57534E 100%)}
+    .svc-body{padding:1.5rem}
+    .svc-body h3{font-size:1.1rem;font-weight:800;margin-bottom:.5rem;color:var(--t1)}
+    .svc-body p{font-size:.87rem;color:var(--t3);line-height:1.6}
+    .svc-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--blue);font-weight:700;font-size:.87rem;text-decoration:none;margin-top:.9rem;transition:gap .2s}
+    .svc-link:hover{gap:.7rem}
+
+    /* ═══════════ HOW ═══════════ */
+    .how{background:linear-gradient(135deg,#0D1B2E,#1A3660)}
+    .how .sec-label{background:rgba(255,255,255,.12);color:#fff}
+    .how .sec-title{color:#fff}
+    .how .sec-sub{color:rgba(255,255,255,.65)}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3.5rem;position:relative}
+    .steps::after{content:'';position:absolute;top:50px;left:17%;right:17%;height:2px;background:rgba(255,255,255,.15);z-index:0}
+    .step{text-align:center;position:relative;z-index:1}
+    .step-num{width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-d));color:var(--t1);display:flex;align-items:center;justify-content:center;font-size:1.7rem;font-weight:900;margin:0 auto 1.5rem;box-shadow:0 10px 28px rgba(245,166,35,.45)}
+    .step h3{font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:.5rem}
+    .step p{font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.65}
+
+    /* ═══════════ CTA BANNER ═══════════ */
+    .cta-strip{
+      background:linear-gradient(135deg,var(--gold),#E8920F);
+      padding:5rem 5%;text-align:center;
+    }
+    .cta-strip h2{font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:900;color:var(--t1);margin-bottom:.7rem;letter-spacing:-.5px}
+    .cta-strip p{color:rgba(15,23,42,.72);font-size:1.05rem;margin-bottom:2.5rem}
+    .cta-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+    .btn-dark{display:inline-flex;align-items:center;gap:.6rem;background:var(--t1);color:#fff;padding:1rem 2.2rem;border-radius:50px;font-weight:800;font-size:1rem;text-decoration:none;transition:all .2s}
+    .btn-dark:hover{background:#1E293B;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+    .btn-green{display:inline-flex;align-items:center;gap:.6rem;background:var(--green);color:#fff;padding:1rem 2.2rem;border-radius:50px;font-weight:800;font-size:1rem;text-decoration:none;transition:all .2s;box-shadow:0 8px 24px rgba(37,211,102,.35)}
+    .btn-green:hover{background:var(--green-d);transform:translateY(-2px)}
+
+    /* ═══════════ FOOTER ═══════════ */
+    footer{background:var(--t1);padding:4rem 5% 2rem}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1200px;margin:0 auto}
+    .footer-brand p{font-size:.88rem;color:rgba(255,255,255,.55);margin-top:.8rem;line-height:1.7;max-width:260px}
+    .social{display:flex;gap:.7rem;margin-top:1.2rem}
+    .social a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:.9rem;transition:background .2s}
+    .social a:hover{background:var(--gold)}
+    .footer-col h4{color:#fff;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.2rem}
+    .footer-col ul{list-style:none}
+    .footer-col ul li{margin-bottom:.55rem}
+    .footer-col ul li a{color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem;transition:color .2s}
+    .footer-col ul li a:hover{color:var(--gold)}
+    .footer-bottom{max-width:1200px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.8rem;color:rgba(255,255,255,.4)}
+
+    /* ═══════════ RESPONSIVE ═══════════ */
+    @media(max-width:960px){
+      .nav-center{display:none}
+      .hamburger{display:flex}
+      .nav-wa{display:none}
+      .hero-inner{grid-template-columns:1fr;gap:3rem}
+      .hero-img-wrap{display:none}
+      .why-grid{grid-template-columns:1fr 1fr}
+      .svc-grid{grid-template-columns:1fr 1fr}
+      .steps{grid-template-columns:1fr;gap:2.5rem}
+      .steps::after{display:none}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:580px){
+      .hero{min-height:auto;padding:100px 0 60px}
+      .hero h1{font-size:2.2rem}
+      .hero-sub{font-size:.97rem}
+      .hero-btns{flex-direction:column}
+      .btn-wa-hero,.btn-outline{justify-content:center;text-align:center}
+      .hero-stats{gap:1.5rem}
+      .hstat strong{font-size:1.8rem}
+      .why-grid,.svc-grid{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
+      .cta-btns{flex-direction:column;align-items:center}
+      .trust-inner{flex-direction:column;gap:1rem;align-items:flex-start;padding:0 1rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo"><span class="logo-fix">Fix</span><span class="logo-ya">Ya</span></a>
+  <ul class="nav-center">
+    <li><a href="index.html" class="active">Inicio</a></li>
+    <li><a href="servicios.html">Servicios</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://wa.me/50412345678?text=Hola%20FixYa,%20necesito%20un%20servicio" class="nav-wa" target="_blank">
+      <i class="fab fa-whatsapp"></i> Solicitar ahora
+    </a>
+    <button class="hamburger" id="ham" onclick="toggleMenu()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Inicio</a>
+  <a href="servicios.html" onclick="toggleMenu()">Servicios</a>
+  <a href="nosotros.html" onclick="toggleMenu()">Nosotros</a>
+  <a href="contacto.html" onclick="toggleMenu()">Contacto</a>
+  <a href="https://wa.me/50412345678?text=Hola%20FixYa" class="mobile-wa" target="_blank">
+    <i class="fab fa-whatsapp"></i> Solicitar servicio por WhatsApp
+  </a>
+</div>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/50412345678?text=Hola%20FixYa,%20necesito%20un%20servicio%20técnico" class="wa-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+  <span class="wa-label">Solicitar ahora</span>
+</a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-circle1"></div>
+  <div class="hero-circle2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><i class="fas fa-map-marker-alt"></i> Tegucigalpa, Honduras</div>
+      <h1>La plataforma de<br/>servicios técnicos<br/><span class="accent">a domicilio</span></h1>
+      <p class="hero-sub">Lo necesitas. Lo resolvemos. <strong style="color:var(--gold)">Ya.</strong><br/>Técnicos verificados, rápidos y confiables donde los necesites.</p>
+      <div class="hero-btns">
+        <a href="https://wa.me/50412345678?text=Hola%20FixYa,%20necesito%20un%20servicio" class="btn-wa-hero" target="_blank">
+          <i class="fab fa-whatsapp"></i> Solicitar por WhatsApp
+        </a>
+        <a href="servicios.html" class="btn-outline">
+          <i class="fas fa-tools"></i> Ver servicios
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><strong>+25</strong><span>Técnicos verificados</span></div>
+        <div class="hstat"><strong>24/7</strong><span>Disponibilidad</span></div>
+        <div class="hstat"><strong>6+</strong><span>Especialidades técnicas</span></div>
+      </div>
+    </div>
+    <div class="hero-img-wrap">
+      <div style="width:100%;border-radius:20px;background:linear-gradient(135deg,rgba(26,86,219,.25),rgba(37,211,102,.2));aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:2rem">
+          <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:1.2rem;text-align:center;color:#fff">
+            <i class="fas fa-wind" style="font-size:1.8rem;color:var(--gold);margin-bottom:.5rem;display:block"></i>
+            <span style="font-size:.82rem;font-weight:600">A/C Residencial</span>
+          </div>
+          <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:1.2rem;text-align:center;color:#fff">
+            <i class="fas fa-building" style="font-size:1.8rem;color:var(--gold);margin-bottom:.5rem;display:block"></i>
+            <span style="font-size:.82rem;font-weight:600">A/C Comercial</span>
+          </div>
+          <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:1.2rem;text-align:center;color:#fff">
+            <i class="fas fa-snowflake" style="font-size:1.8rem;color:var(--gold);margin-bottom:.5rem;display:block"></i>
+            <span style="font-size:.82rem;font-weight:600">Refrigeración</span>
+          </div>
+          <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:1.2rem;text-align:center;color:#fff">
+            <i class="fas fa-warehouse" style="font-size:1.8rem;color:var(--gold);margin-bottom:.5rem;display:block"></i>
+            <span style="font-size:.82rem;font-weight:600">Cuartos Fríos</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-badge-card">
+        <div class="hbc-icon"><i class="fas fa-shield-check"></i></div>
+        <div class="hbc-text"><strong>Técnico verificado</strong><span>DPI · Antecedentes · Certificado</span></div>
+      </div>
+      <div class="hero-badge-card2">
+        <div class="hbc2-icon"><i class="fas fa-star"></i></div>
+        <div class="hbc2-text"><strong>4.9 / 5</strong><span>Calificación promedio</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust">
+  <div class="trust-inner">
+    <div class="ti"><i class="fas fa-user-check"></i> Técnicos 100% verificados</div>
+    <div class="ti"><i class="fas fa-bolt"></i> Respuesta en minutos</div>
+    <div class="ti"><i class="fas fa-star"></i> Calidad garantizada</div>
+    <div class="ti"><i class="fas fa-shield-alt"></i> Pagos transparentes</div>
+    <div class="ti"><i class="fab fa-whatsapp"></i> Soporte 24/7 por WhatsApp</div>
+  </div>
+</div>
+
+<!-- WHY -->
+<section class="sec sec-alt">
+  <div class="container">
+    <span class="sec-label"><i class="fas fa-award"></i> ¿Por qué FixYa?</span>
+    <h2 class="sec-title">El servicio técnico que<br/>Tegucigalpa merece</h2>
+    <p class="sec-sub">No más esperas, no más técnicos sin verificar. FixYa conecta tu necesidad con el experto correcto al instante.</p>
+    <div class="why-grid">
+      <di

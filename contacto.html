@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto — FixYa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #1A56DB; --blue-d: #1E3A5F; --blue-l: #EBF2FF;
+      --gold: #F5A623; --gold-d: #D4891A;
+      --white: #FFFFFF; --gray-50: #F8FAFC; --gray-100: #F1F5F9;
+      --gray-200: #E2E8F0; --gray-600: #475569; --gray-700: #334155;
+      --dark: #0F172A; --radius: 12px;
+      --shadow: 0 4px 24px rgba(0,0,0,.08); --shadow-lg: 0 12px 40px rgba(0,0,0,.14);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--dark); background: var(--white); }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%; height: 70px;
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo .fix { font-size: 1.6rem; font-weight: 900; color: var(--dark); letter-spacing: -1px; }
+    .nav-logo .ya  { font-size: 1.6rem; font-weight: 900; color: var(--gold); letter-spacing: -1px; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--gray-700); font-weight: 500; font-size: .95rem; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+    .nav-cta { background: var(--blue); color: var(--white); padding: .55rem 1.4rem; border-radius: 50px; font-weight: 600; font-size: .9rem; text-decoration: none; transition: background .2s; }
+    .nav-cta:hover { background: var(--blue-d); }
+
+    .page-hero {
+      padding: 140px 6% 80px; text-align: center; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, var(--blue-d) 0%, #1A56DB 100%);
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1600&q=80') center/cover;
+      opacity: .08;
+    }
+    .page-hero * { position: relative; z-index: 1; }
+    .badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3); color: #fff; padding: .4rem 1rem; border-radius: 50px; font-size: .8rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .page-hero h1 { font-size: clamp(2rem,4vw,3rem); font-weight: 900; color: #fff; margin-bottom: 1rem; }
+    .page-hero p { font-size: 1.1rem; color: rgba(255,255,255,.8); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+    .main-contact { padding: 6rem 6%; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; }
+
+    /* INFO SIDE */
+    .contact-info h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; }
+    .contact-info p { color: var(--gray-600); line-height: 1.8; margin-bottom: 2rem; }
+    .contact-methods { display: flex; flex-direction: column; gap: 1.2rem; }
+    .contact-method {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.2rem 1.4rem; background: var(--gray-50);
+      border-radius: var(--radius); border: 1px solid var(--gray-200);
+      text-decoration: none; color: var(--dark); transition: all .2s;
+    }
+    .contact-method:hover { border-color: var(--blue); box-shadow: var(--shadow); transform: translateX(4px); }
+    .cm-icon {
+      width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+    }
+    .cm-icon.wa  { background: #DCFCE7; color: #15803D; }
+    .cm-icon.mail { background: var(--blue-l); color: var(--blue); }
+    .cm-icon.map  { background: #FEF9C3; color: #A16207; }
+    .cm-body strong { display: block; font-size: .95rem; font-weight: 700; margin-bottom: .2rem; }
+    .cm-body span { font-size: .85rem; color: var(--gray-600); }
+
+    /* FORM SIDE */
+    .contact-form-box {
+      background: var(--white); border-radius: 20px; padding: 2.5rem;
+      box-shadow: var(--shadow-lg); border: 1px solid var(--gray-200);
+    }
+    .contact-form-box h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: .4rem; }
+    .contact-form-box p { font-size: .9rem; color: var(--gray-600); margin-bottom: 2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: .4rem; color: var(--gray-700); }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: .75rem 1rem; border: 1.5px solid var(--gray-200);
+      border-radius: 10px; font-family: 'Inter', sans-serif; font-size: .95rem;
+      color: var(--dark); background: var(--white); outline: none; transition: border-color .2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blue); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit {
+      width: 100%; padding: .9rem; background: var(--blue); color: #fff;
+      border: none; border-radius: 50px; font-family: 'Inter', sans-serif;
+      font-size: 1rem; font-weight: 700; cursor: pointer; transition: all .2s;
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+    }
+    .form-submit:hover { background: var(--blue-d); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(26,86,219,.35); }
+    .form-note { text-align: center; font-size: .78rem; color: var(--gray-600); margin-top: .8rem; }
+
+    /* TECH SECTION */
+    .tech-join { background: var(--gray-50); padding: 6rem 6%; }
+    .tj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .section-label { display: inline-block; background: var(--blue-l); color: var(--blue); padding: .35rem .9rem; border-radius: 50px; font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 1rem; }
+    h2.section-title { font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 800; line-height: 1.2; }
+    .tj-text p { color: var(--gray-600); line-height: 1.8; margin-top: 1rem; }
+    .tj-steps { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+    .tj-step { display: flex; gap: 1rem; align-items: flex-start; }
+    .tj-step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .85rem; flex-shrink: 0; }
+    .tj-step-body strong { display: block; font-size: .95rem; font-weight: 700; }
+    .tj-step-body span { font-size: .85rem; color: var(--gray-600); }
+    .btn-gold { display: inline-flex; align-items: center; gap: .5rem; background: var(--gold); color: var(--dark); padding: .9rem 2rem; border-radius: 50px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all .2s; margin-top: 2rem; }
+    .btn-gold:hover { background: var(--gold-d); transform: translateY(-2px); }
+    .tj-img img { width: 100%; border-radius: 20px; box-shadow: var(--shadow-lg); }
+
+    footer{background:var(--dark);padding:4rem 6% 2rem}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1100px;margin:0 auto}
+    .footer-brand p{font-size:.88rem;color:rgba(255,255,255,.55);margin-top:.8rem;line-height:1.7;max-width:260px}
+    .social{display:flex;gap:.7rem;margin-top:1.2rem}
+    .social a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:.9rem;transition:background .2s}
+    .social a:hover{background:var(--gold)}
+    .footer-col h4{color:#fff;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.2rem}
+    .footer-col ul{list-style:none}
+    .footer-col ul li{margin-bottom:.55rem}
+    .footer-col ul li a{color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem;transition:color .2s}
+    .footer-col ul li a:hover{color:var(--gold)}
+    .footer-bottom{max-width:1100px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.8rem;color:rgba(255,255,255,.4)}
+    .footer-logo{text-decoration:none;display:inline-flex;margin-bottom:.6rem}
+    .fl-fix{font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-1px}
+    .fl-ya{font-size:1.5rem;font-weight:900;color:var(--gold);letter-spacing:-1px}
+    @media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:580px){.footer-grid{grid-template-columns:1fr}}
+
+    @media (max-width: 900px) {
+      .contact-grid, .tj-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .tj-img { display: none; }
+      nav .nav-links { display: none; }
+    }
+  
+    /* Hamburger */
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+    .hamburger span{display:block;width:24px;height:2.5px;background:var(--dark);border-radius:2px;transition:all .3s}
+    .hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+    .mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;z-index:190;background:#fff;border-bottom:2px solid var(--gray-200);padding:1.5rem 6%;flex-direction:column;gap:1rem;box-shadow:0 8px 32px rgba(0,0,0,.1)}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{text-decoration:none;color:var(--dark);font-weight:600;font-size:1.05rem;padding:.5rem 0;border-bottom:1px solid var(--gray-200)}
+    .mobile-menu a:last-child{border:none}
+    .mobile-wa{display:flex;align-items:center;justify-content:center;gap:.6rem;background:#25D366;color:#fff;padding:.9rem;border-radius:12px;font-weight:700;font-size:1rem;text-decoration:none;margin-top:.5rem}
+    .wa-float{position:fixed;bottom:28px;right:24px;z-index:300;display:flex;align-items:center;gap:.6rem;background:#25D366;color:#fff;padding:.85rem 1.4rem;border-radius:50px;font-weight:700;font-size:1rem;text-decoration:none;box-shadow:0 8px 28px rgba(37,211,102,.5);transition:all .25s;animation:pulse-wa 2.5s infinite}
+    .wa-float:hover{background:#1ebe5d;transform:translateY(-3px) scale(1.04);animation:none}
+    .wa-float i{font-size:1.3rem}
+    @keyframes pulse-wa{0%,100%{box-shadow:0 8px 28px rgba(37,211,102,.5)}50%{box-shadow:0 8px 36px rgba(37,211,102,.75),0 0 0 8px rgba(37,211,102,.15)}}
+    @media(max-width:960px){.nav-links{display:none!important}.hamburger{display:flex}.nav-cta{display:none}}
+    @media(max-width:600px){.wa-float .wa-label{display:none}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="fix">Fix</span><span class="ya">Ya</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="servicios.html">Servicios</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="contacto.html" class="active">Contacto</a></li>
+  </ul>
+  <a href="https://wa.me/50412345678?text=Hola%20FixYa" class="nav-cta" target="_blank">
+    <i class="fab fa-whatsapp"></i> Solicitar servicio
+  </a>
+  <button class="hamburger" id="ham" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Inicio</a>
+  <a href="servicios.html">Servicios</a>
+  <a href="nosotros.html">Nosotros</a>
+  <a href="contacto.html">Contacto</a>
+  <a href="https://wa.me/50412345678?text=Hola%20FixYa" class="mobile-wa" target="_blank"><i class="fab fa-whatsapp"></i> Solicitar servicio por WhatsApp</a>
+</div>
+
+<div class="page-hero">
+  <div class="badge"><i class="fas fa-envelope"></i> Escríbenos</div>
+  <h1>Contacto</h1>
+  <p>¿Necesitas un servicio técnico o tienes alguna pregunta? Estamos aquí para ayudarte.</p>
+</div>
+
+<section class="main-contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Hablemos</h2>
+        <p>La forma más rápida de contactarnos es por WhatsApp. También puedes escribirnos por correo o llenar el formulario y te respondemos pronto.</p>
+        <div class="contact-methods">
+          <a href="https://wa.me/50412345678?text=Hola%20FixYa,%20necesito%20ayuda" class="contact-method" target="_blank">
+            <div class="cm-icon wa"><i class="fab fa-whatsapp"></i></div>
+            <div class="cm-body"><strong>WhatsApp</strong><span>+504 1234-5678 — Respuesta inmediata</span></div>
+          </a>
+          <a href="mailto:info@fixyahn.com" class="contact-method">
+            <div class="cm-icon mail"><i class="fas fa-envelope"></i></div>
+            <div class="cm-body"><strong>Correo electrónico</strong><span>info@fixyahn.com</span></div>
+          </a>
+          <div class="contact-method" style="cursor:default">
+            <div class="cm-icon map"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="cm-body"><strong>Área de cobertura</strong><span>Tegucigalpa y Comayagüela, Francisco Morazán</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-box">
+        <h3>Solicitar un servicio</h3>
+        <p>Cuéntanos qué necesitas y te contactamos en minutos.</p>
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre completo</label>
+              <input type="text" placeholder="Tu nombre" required />
+            </div>
+            <div class="form-group">
+              <label>Teléfono / WhatsApp</label>
+              <input type="tel" placeholder="+504 XXXX-XXXX" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Correo electrónico</label>
+            <input type="email" placeholder="tucorreo@ejemplo.com" />
+          </div>
+          <div class="form-group">
+            <label>Tipo de servicio</label>
+            <select required>
+              <option value="">Selecciona el servicio</option>
+              <option>Aire Acondicionado — Instalación</option>
+              <option>Aire Acondicionado — Mantenimiento</option>
+              <option>Aire Acondicionado — Reparación</option>
+              <option>Refrigeración — Doméstica</option>
+              <option>Refrigeración — Comercial</option>
+              <option>Otro / No sé aún</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Colonia / Sector en Tegucigalpa</label>
+            <input type="text" placeholder="Ej: Colonia Kennedy, Centro, etc." />
+          </div>
+          <div class="form-group">
+            <label>Describe el problema</label>
+            <textarea placeholder="Cuéntanos qué está pasando con tu equipo..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">
+            <i class="fas fa-paper-plane"></i> Enviar solicitud
+          </button>
+          <p class="form-note">También puedes escribirnos directamente por <a href="https://wa.me/50412345678" target="_blank" style="color:var(--blue)">WhatsApp</a> para atención inmediata.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH JOIN -->
+<section class="tech-join">
+  <div class="container">
+    <div class="tj-grid">
+      <div class="tj-text">
+        <span class="section-label">¿Eres técnico?</span>
+        <h2 class="section-title">Únete a la red de técnicos FixYa</h2>
+        <p>Si eres técnico en A/C, refrigeración o cualquier oficio técnico en Tegucigalpa, FixYa te da trabajo constante. Sin inversión, sin mensualidades.</p>
+        <div class="tj-steps">
+          <div class="tj-step">
+            <div class="tj-step-num">1</div>
+            <div class="tj-step-body"><strong>Escríbenos por WhatsApp</strong><span>Dinos tu especialidad y años de experiencia</span></div>
+          </div>
+          <div class="tj-step">
+            <div class="tj-step-num">2</div>
+            <div class="tj-step-body"><strong>Verificación rápida</strong><span>DPI, antecedentes y revisión de herramientas</span></div>
+          </div>
+          <div class="tj-step">
+            <div class="tj-step-num">3</div>
+            <div class="tj-step-body"><strong>¡Empieza a recibir trabajo!</strong><span>Comisión 80% para ti, 20% para FixYa</span></div>
+          </div>
+        </div>
+        <a href="https://wa.me/50412345678?text=Hola%20FixYa,%20quiero%20unirme%20como%20técnico%20verificado" class="btn-gold" target="_blank">
+          <i class="fab fa-whatsapp"></i> Quiero ser técnico FixYa
+        </a>
+      </div>
+      <div class="tj-img">
+        <img src="https://images.unsplash.com/photo-1622977266039-dab6a9e1a941?w=700&q=80" alt="Técnico" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo"><span class="fl-fix">Fix</span><span class="fl-ya">Ya</span></a>
+      <p>La plataforma de servicios té

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Servicios — FixYa Honduras</title>
+  <meta name="description" content="FixYa cubre todas las ramas del frío en Honduras: A/C residencial y comercial, refrigeración doméstica y comercial, cuartos fríos e industrial."/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --blue:#1A56DB;--blue-d:#1E3A5F;--blue-l:#EBF2FF;--blue-m:#2563EB;
+      --gold:#F5A623;--gold-d:#D4891A;
+      --white:#fff;--off:#F8FAFC;--gray:#E2E8F0;
+      --t1:#0F172A;--t2:#334155;--t3:#64748B;
+      --green:#25D366;--green-d:#1ebe5d;
+      --r:12px;--r-lg:20px;
+      --sh:0 4px 20px rgba(0,0,0,.08);--sh-lg:0 16px 48px rgba(0,0,0,.14);
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;color:var(--t1);background:var(--white);overflow-x:hidden}
+
+    /* ═══ NAV ═══ */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:200;
+      background:rgba(255,255,255,.97);backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--gray);
+      height:68px;display:flex;align-items:center;justify-content:space-between;
+      padding:0 5%;transition:box-shadow .3s;
+    }
+    nav.scrolled{box-shadow:var(--sh)}
+    .nav-logo{text-decoration:none;display:flex;align-items:center}
+    .logo-fix{font-size:1.7rem;font-weight:900;color:var(--t1);letter-spacing:-1.5px}
+    .logo-ya{font-size:1.7rem;font-weight:900;color:var(--gold);letter-spacing:-1.5px}
+    .nav-center{display:flex;gap:2rem;list-style:none}
+    .nav-center a{text-decoration:none;color:var(--t2);font-weight:500;font-size:.93rem;transition:color .2s}
+    .nav-center a:hover,.nav-center a.active{color:var(--blue)}
+    .nav-right{display:flex;align-items:center;gap:.8rem}
+    .nav-wa{
+      display:flex;align-items:center;gap:.5rem;background:var(--green);color:#fff;
+      padding:.55rem 1.2rem;border-radius:50px;font-weight:700;font-size:.88rem;
+      text-decoration:none;transition:all .2s;white-space:nowrap;
+    }
+    .nav-wa:hover{background:var(--green-d);transform:translateY(-1px)}
+    /* Hamburger */
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+    .hamburger span{display:block;width:24px;height:2.5px;background:var(--t1);border-radius:2px;transition:all .3s}
+    .hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+    .mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;z-index:190;background:#fff;border-bottom:2px solid var(--gray);padding:1.5rem 5%;flex-direction:column;gap:1rem;box-shadow:0 8px 32px rgba(0,0,0,.1)}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{text-decoration:none;color:var(--t1);font-weight:600;font-size:1.05rem;padding:.5rem 0;border-bottom:1px solid var(--gray)}
+    .mobile-menu a:last-child{border:none}
+    .mobile-wa{display:flex;align-items:center;justify-content:center;gap:.6rem;background:var(--green);color:#fff;padding:.9rem;border-radius:12px;font-weight:700;font-size:1rem;text-decoration:none;margin-top:.5rem}
+    @media(max-width:960px){.nav-center{display:none}.hamburger{display:flex}.nav-wa{display:none}}
+
+    /* ═══ FLOATING WA ═══ */
+    .wa-float{
+      position:fixed;bottom:28px;right:24px;z-index:300;
+      display:flex;align-items:center;gap:.6rem;
+      background:var(--green);color:#fff;
+      padding:.85rem 1.4rem;border-radius:50px;
+      font-weight:700;font-size:1rem;text-decoration:none;
+      box-shadow:0 8px 28px rgba(37,211,102,.5);
+      transition:all .25s;animation:pulse-wa 2.5s infinite;
+    }
+    .wa-float:hover{background:var(--green-d);transform:translateY(-3px) scale(1.04);animation:none}
+    .wa-float i{font-size:1.3rem}
+    @keyframes pulse-wa{0%,100%{box-shadow:0 8px 28px rgba(37,211,102,.5)}50%{box-shadow:0 8px 36px rgba(37,211,102,.75),0 0 0 8px rgba(37,211,102,.15)}}
+    @media(max-width:600px){.wa-float{padding:.8rem 1rem;bottom:20px;right:16px}.wa-float .wa-label{display:none}}
+
+    /* ═══ PAGE HERO ═══ */
+    .page-hero{
+      padding:120px 5% 80px;
+      background:linear-gradient(135deg,#0D1B2E 0%,#1A3660 50%,#1A56DB 100%);
+      position:relative;overflow:hidden;text-align:center;
+    }
+    .page-hero::before{display:none}
+    .page-hero>*{position:relative;z-index:1}
+    .ph-badge{
+      display:inline-flex;align-items:center;gap:.5rem;
+      background:rgba(245,166,35,.2);border:1px solid rgba(245,166,35,.4);
+      color:var(--gold);padding:.4rem 1rem;border-radius:50px;
+      font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.5rem;
+    }
+    .page-hero h1{font-size:clamp(2rem,4.5vw,3.4rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1rem;letter-spacing:-1px}
+    .page-hero p{font-size:1.1rem;color:rgba(255,255,255,.78);max-width:680px;margin:0 auto;line-height:1.7}
+    .hero-stats{display:flex;justify-content:center;gap:4rem;margin-top:3rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.15);flex-wrap:wrap}
+    .hs strong{display:block;font-size:2.2rem;font-weight:900;color:var(--gold);line-height:1}
+    .hs span{font-size:.82rem;color:rgba(255,255,255,.65);margin-top:.3rem;display:block}
+
+    /* ═══ SHARED ═══ */
+    .container{max-width:1200px;margin:0 auto}
+    .sec{padding:5rem 5%}
+    .sec-alt{background:var(--off)}
+    .sec-label{display:inline-flex;align-items:center;gap:.4rem;background:var(--blue-l);color:var(--blue);padding:.35rem .9rem;border-radius:50px;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem}
+    .sec-title{font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:900;line-height:1.15;color:var(--t1);letter-spacing:-.5px}
+    .sec-sub{color:var(--t3);font-size:1rem;line-height:1.75;margin-top:.8rem;max-width:680px}
+
+    /* ═══ CATEGORY ROW ═══ */
+    .cat-row{
+      display:grid;grid-template-columns:1fr 1fr;gap:4rem;
+      align-items:center;margin-bottom:6rem;
+    }
+    .cat-row:last-child{margin-bottom:0}
+    .cat-img{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg);position:relative;height:340px;display:flex;align-items:center;justify-content:center}
+    .cat-bg-icon{font-size:9rem;color:rgba(255,255,255,.13);position:absolute}
+    .gr-ac{background:linear-gradient(135deg,#0D1B2E,#1A56DB)}
+    .gr-ac-com{background:linear-gradient(135deg,#0F2044,#2563EB)}
+    .gr-refrig{background:linear-gradient(135deg,#064E3B,#059669)}
+    .gr-refrig-com{background:linear-gradient(135deg,#134E4A,#0F766E)}
+    .gr-cold{background:linear-gradient(135deg,#0C2340,#0369A1)}
+    .gr-truck{background:linear-gradient(135deg,#1C1917,#57534E)}
+    .cat-tag{
+      display:inline-flex;align-items:center;gap:.5rem;
+      padding:.35rem .9rem;border-radius:50px;font-size:.75rem;font-weight:700;text-transform:uppercase;margin-bottom:1rem;
+    }
+    .tag-on{background:#DCFCE7;color:#15803D}
+    .tag-soon{background:var(--gray);color:var(--t3)}
+    .cat-info h2{font-size:clamp(1.5rem,2.5vw,2rem);font-weight:800;margin-bottom:.8rem;color:var(--t1)}
+    .cat-info p{color:var(--t3);font-size:.97rem;line-height:1.8}
+    .cat-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.8rem}
+    .mini-card{background:var(--white);border:1.5px solid var(--gray);border-radius:var(--r);padding:1.2rem;transition:all .2s}
+    .sec-alt .mini-card{background:var(--white)}
+    .mini-card:hover{border-color:var(--blue);box-shadow:var(--sh)}
+    .mini-card i{color:var(--blue);font-size:1.1rem;margin-bottom:.6rem;display:block}
+    .mini-card strong{display:block;font-size:.88rem;font-weight:700;margin-bottom:.3rem;color:var(--t1)}
+    .mini-card span{font-size:.8rem;color:var(--t3);line-height:1.5}
+    .cat-wa{
+      display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;
+      background:var(--green);color:#fff;padding:.8rem 1.8rem;
+      border-radius:50px;font-weight:700;font-size:.93rem;text-decoration:none;transition:all .2s;
+    }
+    .cat-wa:hover{background:var(--green-d);transform:translateY(-2px);box-shadow:0 8px 20px rgba(37,211,102,.35)}
+
+    /* ═══ SCOPE BANNER ═══ */
+    .scope{background:linear-gradient(135deg,#0D1B2E,#1A3660);padding:5rem 5%;text-align:center}
+    .scope .sec-label{background:rgba(255,255,255,.12);color:#fff}
+    .scope h2{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;color:#fff;margin-bottom:.8rem;letter-spacing:-.5px}
+    .scope p{color:rgba(255,255,255,.65);font-size:1rem;line-height:1.75;max-width:680px;margin:0 auto}
+    .scope-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;margin-top:3rem}
+    .scope-item{
+      text-align:center;padding:1.5rem .8rem;
+      background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+      border-radius:var(--r);transition:all .25s;
+    }
+    .scope-item:hover{background:rgba(255,255,255,.14);border-color:var(--gold)}
+    .scope-item i{font-size:1.8rem;color:var(--gold);display:block;margin-bottom:.7rem}
+    .scope-item span{font-size:.78rem;color:rgba(255,255,255,.8);font-weight:500;line-height:1.4;display:block}
+
+    /* ═══ CTA STRIP ═══ */
+    .cta-strip{background:linear-gradient(135deg,var(--gold),#E8920F);padding:5rem 5%;text-align:center}
+    .cta-strip h2{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;color:var(--t1);margin-bottom:.7rem;letter-spacing:-.5px}
+    .cta-strip p{color:rgba(15,23,42,.7);font-size:1.05rem;margin-bottom:2.5rem}
+    .cta-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+    .btn-dark{display:inline-flex;align-items:center;gap:.6rem;background:var(--t1);color:#fff;padding:1rem 2.2rem;border-radius:50px;font-weight:800;font-size:1rem;text-decoration:none;transition:all .2s}
+    .btn-dark:hover{background:#1E293B;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+    .btn-green{display:inline-flex;align-items:center;gap:.6rem;background:var(--green);color:#fff;padding:1rem 2.2rem;border-radius:50px;font-weight:800;font-size:1rem;text-decoration:none;transition:all .2s;box-shadow:0 8px 24px rgba(37,211,102,.35)}
+    .btn-green:hover{background:var(--green-d);transform:translateY(-2px)}
+
+    /* ═══ FOOTER ═══ */
+    footer{background:var(--t1);padding:4rem 5% 2rem}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1200px;margin:0 auto}
+    .footer-brand p{font-size:.88rem;color:rgba(255,255,255,.55);margin-top:.8rem;line-height:1.7;max-width:260px}
+    .social{display:flex;gap:.7rem;margin-top:1.2rem}
+    .social a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:.9rem;transition:background .2s}
+    .social a:hover{background:var(--gold)}
+    .footer-col h4{color:#fff;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.2rem}
+    .footer-col ul{list-style:none}
+    .footer-col ul li{margin-bottom:.55rem}
+    .footer-col ul li a{color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem;transition:color .2s}
+    .footer-col ul li a:hover{color:var(--gold)}
+    .footer-bottom{max-width:1200px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.8rem;color:rgba(255,255,255,.4)}
+    .footer-logo{text-decoration:none;display:inline-flex;margin-bottom:.6rem}
+    .fl-fix{font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-1px}
+    .fl-ya{font-size:1.5rem;font-weight:900;color:var(--gold);letter-spacing:-1px}
+
+    /* ═══ RESPONSIVE ═══ */
+    @media(max-width:960px){
+      .cat-row{grid-template-columns:1fr;gap:2rem;margin-bottom:4rem}
+      .cat-img img{height:260px}
+      .scope-grid{grid-template-columns:repeat(3,1fr)}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:580px){
+      .cat-cards{grid-template-columns:1fr}
+      .scope-grid{grid-template-columns:repeat(2,1fr)}
+      .hero-stats{gap:2rem}
+      .footer-grid{grid-template-columns:1fr}
+      .cta-btns{flex-direction:column;align-items:center}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo"><span class="logo-fix">Fix</span><span class="logo-ya">Ya</span></a>
+  <ul class="nav-center">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="servicios.html" class="active">Servicios</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://wa.me/50412345678?text=Hola%20FixYa,%20necesito%20información%20sobre%20servicios" class="nav-wa" target="_blank">
+      <i class="fab fa-whatsapp"></i> Solicitar servicio
+    </a>
+    <button class="hamburger" id="ham" onclick="toggleMenu()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Inicio</a>
+  <a href="servicios.html" onclick="toggleMenu()">Servicios</a>
+  <a href="nosotros.html" onclick="toggleMenu()">Nosotros</a>
+  <a href="contacto.html" onclick="toggleMenu()">Contacto</a>
+  <a href="https://wa.me/50412345678?text=Hola%20FixYa" class="mobile-wa" target="_blank">
+    <i class="fab fa-whatsapp"></i> Solicitar por WhatsApp
+  </a>
+</div>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/50412345678?text=Hola%20FixYa,%20quiero%20solicitar%20un%20servicio%20técnico" class="wa-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+  <span class="wa-label">Solicitar ahora</span>
+</a>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="ph-badge"><i class="fas fa-snowflake"></i> Especialistas en frío</div>
+  <h1>Todas las ramas del frío.<br/>Un solo lugar.</h1>
+  <p>FixYa cubre el espectro completo de climatización, refrigeración y sistemas de frío — desde tu hogar hasta grandes instalaciones comerciales e industriales en Honduras.</p>
+  <div class="hero-stats">
+    <div class="hs"><strong>6+</strong><span>Ramas especializadas</span></div>
+    <div class="hs"><strong>+25</strong><span>Técnicos verificados</span></div>
+    <div class="hs"><strong>24/7</strong><span>Disponibilidad</span></div>
+    <div class="hs"><strong>Teg.</strong><span>Tegucigalpa, HN</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!--          SERVICIOS DISPONIBLES         -->
+<!-- ═══════════════════════════════════════ -->
+<section class="sec">
+  <div class="container">
+    <span class="sec-label"><i class="fas fa-check-circle"></i> Disponible ahora</span>
+    <h2 class="sec-title">Servicios activos en Tegucigalpa</h2>
+    <p class="sec-sub">Nuestros técnicos verificados cubren estas especialidades hoy mismo. Agenda en minutos por WhatsApp.</p>
+
+    <!-- A/C RESIDENCIAL -->
+    <div class="cat-row" id="ac-residencial" style="margin-top:3.5rem">
+      <div class="cat-img gr-ac">
+        <i class="fas fa-wind cat-bg-icon"></i>
+      </div>
+      <div class="cat-info">
+        <span class="cat-tag tag-on"><i class="fas fa-check-circle"></i> Disponible ahora</span>
+        <h2>Aire Acondicionado Residencial</h2>
+        <p>Instalación, mantenimiento preventivo y reparación de todos los sistemas de A/C para viviendas. Trabajamos con todas las marcas del mercado hondureño con garantía de trabajo.</p>
+        <div class="cat-cards">
+          <div class="mini-card"><i class="fas fa-wind"></i><strong>Instalación de minisplits</strong><span>Trazado, canalización, carga de gas R-410A / R-32</span></div>
+          <div class="mini-card"><i class="fas fa-wrench"></i><strong>Mantenimiento preventivo</strong><span>Limpieza profunda de filtros, serpentines y bobinas</span></div>
+          <div class="mini-card"><i class="fas fa-tools"></i><strong>Diagnóstico y reparación</strong><span>Fallas eléctricas, fugas de gas, compresores, motores</span></div>
+          <div class="mini-card"><i class="fas fa-thermometer-half"></i><strong>Recarga de gas</strong><span>Verificación de presiones y recarga con gas certificado</span></div>
+        </div>
+        <a href="https://wa.me/50412345678?text=Hola%20FixYa,%20necesito%20servicio%20de%20A/C%20residencial" class="cat-wa" target="_blank">
+          <i class="fab fa-whatsapp"></i> Solicitar este servicio
+        </a>
+      </div>
+    </div>
+
+    <!-- A/C COMERCIAL -->
+    <div class="cat-row" id="ac-comercial">
+      <div class="cat-info">
+        <span class="cat-tag tag-on"><i class="fas fa-check-circle"></i> Disponible ahora</span>
+        <h2>Aire Acondicionado Comercial</h2>
+        <p>Soluciones de climatización para oficinas, locales comerciales, hoteles, clínicas y centros de datos. Especialistas en sistemas de alta capacidad y eficiencia energética.</p>
+        <div class="cat-cards">
+          <div class="mini-card"><i class="fas fa-building"></i><strong>Sistemas VRF / VRV</strong><span>Instalación y mantenimiento de sistemas multi-zona</span></div>
+          <div class="mini-card"><i class="fas fa-th-large"></i><strong>Unidades cassette</strong><span>Instalación en techos de oficinas y locales</span></div>
+          <div class="mini-card"><i class="fas fa-industry"></i><strong>A/C central</strong><span>Manejadoras de aire y sistemas de ductos</span></div>
+          <div class="mini-card"><i class="fas fa-cog"></i><strong>Mantenimiento programado</strong><span>Contratos de mantenimiento preventivo mensual</span></div>
+        </div>
+        <a href="https://wa.me/50412345678?text=Hola%20FixYa,%20necesito%20A/C%20comercial" class="cat-wa" target="_blank">
+          <i class="fab fa-whatsapp"></i> Solicitar este servicio
+        </a>
+      </div>
+      <div class="cat-img gr-ac-com">
+        <i class="fas fa-building cat-bg-icon"></i>
+      </div>
+    </div>
+
+    <!-- REFRIGERACIÓN DOMÉSTICA -->
+    <div class="cat-row" id="refrig-domestica">
+      <div class="cat-img gr-refrig">
+        <i class="fas fa-snowflake cat-bg-icon"></i>
+      </div>
+      <div class="cat-info">
+        <span class="cat-tag tag-on"><i class="fas fa-check-circle"></i> Disponible ahora</span>
+        <h2>Refrigeración Doméstica</h2>
+        <p>Reparación y mantenimiento de refrigeradoras, congeladores y máquin
