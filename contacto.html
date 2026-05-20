@@ -168,7 +168,7 @@
     <li><a href="nosotros.html">Nosotros</a></li>
     <li><a href="contacto.html" class="active">Contacto</a></li>
   </ul>
-  <a href="https://wa.me/50498481179?text=Hola%20FixYa" class="nav-cta" target="_blank">
+  <a href="https://wa.me/50412345678?text=Hola%20FixYa" class="nav-cta" target="_blank">
     <i class="fab fa-whatsapp"></i> Solicitar servicio
   </a>
   <button class="hamburger" id="ham" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -178,7 +178,7 @@
   <a href="servicios.html">Servicios</a>
   <a href="nosotros.html">Nosotros</a>
   <a href="contacto.html">Contacto</a>
-  <a href="https://wa.me/50498481179?text=Hola%20FixYa" class="mobile-wa" target="_blank"><i class="fab fa-whatsapp"></i> Solicitar servicio por WhatsApp</a>
+  <a href="https://wa.me/50412345678?text=Hola%20FixYa" class="mobile-wa" target="_blank"><i class="fab fa-whatsapp"></i> Solicitar servicio por WhatsApp</a>
 </div>
 
 <div class="page-hero">
@@ -194,17 +194,13 @@
         <h2>Hablemos</h2>
         <p>La forma más rápida de contactarnos es por WhatsApp. También puedes escribirnos por correo o llenar el formulario y te respondemos pronto.</p>
         <div class="contact-methods">
-          <a href="https://wa.me/50498481179?text=Hola%20FixYa,%20necesito%20ayuda" class="contact-method" target="_blank">
+          <a href="https://wa.me/50412345678?text=Hola%20FixYa,%20necesito%20ayuda" class="contact-method" target="_blank">
             <div class="cm-icon wa"><i class="fab fa-whatsapp"></i></div>
-            <div class="cm-body"><strong>WhatsApp</strong><span>+504 9848-1179 — Respuesta inmediata</span></div>
+            <div class="cm-body"><strong>WhatsApp</strong><span>+504 1234-5678 — Respuesta inmediata</span></div>
           </a>
-          <a href="mailto:infofixya@fixyahn.com" class="contact-method">
+          <a href="mailto:info@fixyahn.com" class="contact-method">
             <div class="cm-icon mail"><i class="fas fa-envelope"></i></div>
-            <div class="cm-body"><strong>Correo — Clientes</strong><span>infofixya@fixyahn.com</span></div>
-          </a>
-          <a href="mailto:rrhhfixya@fixyahn.com" class="contact-method">
-            <div class="cm-icon mail"><i class="fas fa-hard-hat"></i></div>
-            <div class="cm-body"><strong>Correo — Técnicos / RRHH</strong><span>rrhhfixya@fixyahn.com</span></div>
+            <div class="cm-body"><strong>Correo electrónico</strong><span>info@fixyahn.com</span></div>
           </a>
           <div class="contact-method" style="cursor:default">
             <div class="cm-icon map"><i class="fas fa-map-marker-alt"></i></div>
@@ -254,7 +250,7 @@
           <button type="submit" class="form-submit">
             <i class="fas fa-paper-plane"></i> Enviar solicitud
           </button>
-          <p class="form-note">También puedes escribirnos directamente por <a href="https://wa.me/50498481179" target="_blank" style="color:var(--blue)">WhatsApp</a> para atención inmediata.</p>
+          <p class="form-note">También puedes escribirnos directamente por <a href="https://wa.me/50412345678" target="_blank" style="color:var(--blue)">WhatsApp</a> para atención inmediata.</p>
         </form>
       </div>
     </div>
@@ -283,9 +279,56 @@
             <div class="tj-step-body"><strong>¡Empieza a recibir trabajo!</strong><span>Comisión 80% para ti, 20% para FixYa</span></div>
           </div>
         </div>
-        <a href="https://wa.me/50498481179?text=Hola%20FixYa,%20quiero%20unirme%20como%20técnico%20verificado" class="btn-gold" target="_blank">
+        <a href="https://wa.me/50412345678?text=Hola%20FixYa,%20quiero%20unirme%20como%20técnico%20verificado" class="btn-gold" target="_blank">
           <i class="fab fa-whatsapp"></i> Quiero ser técnico FixYa
         </a>
       </div>
       <div class="tj-img">
-        <img src="https://images.unsplash.com/photo-1622977266039-dab6a9e1a941?w=
+        <img src="https://images.unsplash.com/photo-1622977266039-dab6a9e1a941?w=700&q=80" alt="Técnico" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo"><span class="fl-fix">Fix</span><span class="fl-ya">Ya</span></a>
+      <p>La plataforma de servicios té
+<script>
+/* ── Hamburger menu ── */
+function toggleMenu() {
+  var ham  = document.getElementById('ham');
+  var menu = document.getElementById('mobileMenu');
+  if (!ham || !menu) return;
+  var isOpen = menu.classList.toggle('open');
+  ham.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+/* Cierra al hacer click fuera */
+document.addEventListener('click', function(e) {
+  var ham  = document.getElementById('ham');
+  var menu = document.getElementById('mobileMenu');
+  if (!ham || !menu) return;
+  if (menu.classList.contains('open') &&
+      !menu.contains(e.target) && !ham.contains(e.target)) {
+    menu.classList.remove('open');
+    ham.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+/* Cierra al cambiar tamaño de pantalla */
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 768) {
+    var ham  = document.getElementById('ham');
+    var menu = document.getElementById('mobileMenu');
+    if (ham)  ham.classList.remove('open');
+    if (menu) { menu.classList.remove('open'); document.body.style.overflow = ''; }
+  }
+});
+/* ── Navbar scroll shadow ── */
+window.addEventListener('scroll', function() {
+  var nav = document.getElementById('navbar');
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 30);
+});
+</script>

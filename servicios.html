@@ -304,3 +304,40 @@
         <span class="cat-tag tag-on"><i class="fas fa-check-circle"></i> Disponible ahora</span>
         <h2>Refrigeración Doméstica</h2>
         <p>Reparación y mantenimiento de refrigeradoras, congeladores y máquin
+<script>
+/* ── Hamburger menu ── */
+function toggleMenu() {
+  var ham  = document.getElementById('ham');
+  var menu = document.getElementById('mobileMenu');
+  if (!ham || !menu) return;
+  var isOpen = menu.classList.toggle('open');
+  ham.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+/* Cierra al hacer click fuera */
+document.addEventListener('click', function(e) {
+  var ham  = document.getElementById('ham');
+  var menu = document.getElementById('mobileMenu');
+  if (!ham || !menu) return;
+  if (menu.classList.contains('open') &&
+      !menu.contains(e.target) && !ham.contains(e.target)) {
+    menu.classList.remove('open');
+    ham.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+/* Cierra al cambiar tamaño de pantalla */
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 768) {
+    var ham  = document.getElementById('ham');
+    var menu = document.getElementById('mobileMenu');
+    if (ham)  ham.classList.remove('open');
+    if (menu) { menu.classList.remove('open'); document.body.style.overflow = ''; }
+  }
+});
+/* ── Navbar scroll shadow ── */
+window.addEventListener('scroll', function() {
+  var nav = document.getElementById('navbar');
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 30);
+});
+</script>
