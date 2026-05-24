@@ -216,7 +216,7 @@
     <a href="https://wa.me/50498481179?text=Hola%20FixYa,%20necesito%20información%20sobre%20servicios" class="nav-wa" target="_blank">
       <i class="fab fa-whatsapp"></i> Solicitar servicio
     </a>
-    <button class="hamburger" id="ham" onclick="toggleMenu()" aria-label="Menú">
+    <button class="hamburger" id="ham"  aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -224,11 +224,11 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html" onclick="toggleMenu()">Inicio</a>
-  <a href="servicios.html" onclick="toggleMenu()">Servicios</a>
-  <a href="ingenieria.html" onclick="toggleMenu()">Ingenier&iacute;a</a>
-  <a href="nosotros.html" onclick="toggleMenu()">Nosotros</a>
-  <a href="contacto.html" onclick="toggleMenu()">Contacto</a>
+  <a href="index.html" >Inicio</a>
+  <a href="servicios.html" >Servicios</a>
+  <a href="ingenieria.html" >Ingenier&iacute;a</a>
+  <a href="nosotros.html" >Nosotros</a>
+  <a href="contacto.html" >Contacto</a>
   <a href="https://wa.me/50498481179?text=Hola%20FixYa" class="mobile-wa" target="_blank">
     <i class="fab fa-whatsapp"></i> Solicitar por WhatsApp
   </a>
@@ -449,38 +449,19 @@
 </footer>
 <script>
 
-document.addEventListener('click',function(e){var h=document.getElementById('ham'),m=document.getElementById('mobileMenu');if(!h||!m)return;if(m.classList.contains('open')&&!m.contains(e.target)&&!h.contains(e.target)){m.classList.remove('open');h.classList.remove('open');document.body.style.overflow=''}});
-window.addEventListener('resize',function(){if(window.innerWidth>768){var h=document.getElementById('ham'),m=document.getElementById('mobileMenu');if(h)h.classList.remove('open');if(m){m.classList.remove('open');document.body.style.overflow=''}}});
+
 window.addEventListener('scroll',function(){var nav=document.getElementById('navbar');if(nav)nav.classList.toggle('scrolled',window.scrollY>30)});
 
-  // ── Hamburger menu ──
+  
+
+  // ── Hamburger ──
   (function(){
-    var ham = document.getElementById('ham');
-    var menu = document.getElementById('mobileMenu');
-    if(!ham || !menu) return;
-    ham.addEventListener('click', function(e){
-      e.stopPropagation();
-      var open = menu.classList.toggle('open');
-      ham.classList.toggle('open', open);
-    });
-    menu.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){
-        menu.classList.remove('open');
-        ham.classList.remove('open');
-      });
-    });
-    document.addEventListener('click', function(e){
-      if(menu.classList.contains('open') && !menu.contains(e.target)){
-        menu.classList.remove('open');
-        ham.classList.remove('open');
-      }
-    });
-    window.addEventListener('resize', function(){
-      if(window.innerWidth > 960){
-        menu.classList.remove('open');
-        ham.classList.remove('open');
-      }
-    });
+    var b=document.getElementById('ham'),m=document.getElementById('mobileMenu');
+    if(!b||!m)return;
+    b.addEventListener('click',function(e){e.stopPropagation();m.classList.toggle('open');b.classList.toggle('open');});
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');b.classList.remove('open');});});
+    document.addEventListener('click',function(e){if(m.classList.contains('open')&&!m.contains(e.target)&&e.target!==b){m.classList.remove('open');b.classList.remove('open');}});
+    window.addEventListener('resize',function(){if(window.innerWidth>960){m.classList.remove('open');b.classList.remove('open');}});
   })();
 </script>
 </body>

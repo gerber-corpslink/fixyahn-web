@@ -552,10 +552,6 @@
 
 <script>
   window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>10)});
-  var ham=document.getElementById('ham'),menu=document.getElementById('mobileMenu');
-  ham.addEventListener('click',function(){ham.classList.toggle('open');menu.classList.toggle('open')});
-  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){ham.classList.remove('open');menu.classList.remove('open')})});
-  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!ham.contains(e.target)){ham.classList.remove('open');menu.classList.remove('open')}});
   // Fecha mínima = mañana
   var fi=document.getElementById('eng_fecha');
   var t=new Date();t.setDate(t.getDate()+1);fi.min=t.toISOString().split('T')[0];
@@ -587,34 +583,16 @@
     window.open('https://wa.me/50498481179?text='+encodeURIComponent(msg),'_blank');
   });
 
-  // ── Hamburger menu ──
+  
+
+  // ── Hamburger ──
   (function(){
-    var ham = document.getElementById('ham');
-    var menu = document.getElementById('mobileMenu');
-    if(!ham || !menu) return;
-    ham.addEventListener('click', function(e){
-      e.stopPropagation();
-      var open = menu.classList.toggle('open');
-      ham.classList.toggle('open', open);
-    });
-    menu.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){
-        menu.classList.remove('open');
-        ham.classList.remove('open');
-      });
-    });
-    document.addEventListener('click', function(e){
-      if(menu.classList.contains('open') && !menu.contains(e.target)){
-        menu.classList.remove('open');
-        ham.classList.remove('open');
-      }
-    });
-    window.addEventListener('resize', function(){
-      if(window.innerWidth > 960){
-        menu.classList.remove('open');
-        ham.classList.remove('open');
-      }
-    });
+    var b=document.getElementById('ham'),m=document.getElementById('mobileMenu');
+    if(!b||!m)return;
+    b.addEventListener('click',function(e){e.stopPropagation();m.classList.toggle('open');b.classList.toggle('open');});
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');b.classList.remove('open');});});
+    document.addEventListener('click',function(e){if(m.classList.contains('open')&&!m.contains(e.target)&&e.target!==b){m.classList.remove('open');b.classList.remove('open');}});
+    window.addEventListener('resize',function(){if(window.innerWidth>960){m.classList.remove('open');b.classList.remove('open');}});
   })();
 </script>
 </body>
