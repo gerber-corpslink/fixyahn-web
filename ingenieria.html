@@ -190,7 +190,7 @@
   </ul>
   <div class="nav-right">
     <a href="#solicitar" class="nav-wa" style="background:var(--blue-d)"><i class="fas fa-hard-hat"></i> Solicitar proyecto</a>
-    <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="ham" aria-label="Menu" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
@@ -585,17 +585,31 @@
 
   
 
-  // ── Hamburger ──
-  (function(){
-    var btn=document.getElementById('ham'),menu=document.getElementById('mobileMenu');
-    if(!btn||!menu)return;
-    function open_(){menu.classList.add('open');btn.classList.add('open');}
-    function close_(){menu.classList.remove('open');btn.classList.remove('open');}
-    btn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();menu.classList.contains('open')?close_():open_();});
-    menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close_);});
-    document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))close_();});
-    window.addEventListener('resize',function(){if(window.innerWidth>960)close_();});
-  })();
+  function toggleNav(btn){
+    var menu=document.getElementById('mobileMenu');
+    var isOpen=menu.classList.contains('open');
+    if(isOpen){menu.classList.remove('open');btn.classList.remove('open');}
+    else{menu.classList.add('open');btn.classList.add('open');}
+  }
+  document.getElementById('mobileMenu').querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      var m=document.getElementById('mobileMenu'),b=document.getElementById('ham');
+      m.classList.remove('open');b.classList.remove('open');
+    });
+  });
+  document.addEventListener('click',function(e){
+    var m=document.getElementById('mobileMenu'),b=document.getElementById('ham');
+    if(!m||!b)return;
+    if(m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){
+      m.classList.remove('open');b.classList.remove('open');
+    }
+  });
+  window.addEventListener('resize',function(){
+    if(window.innerWidth>960){
+      var m=document.getElementById('mobileMenu'),b=document.getElementById('ham');
+      if(m)m.classList.remove('open');if(b)b.classList.remove('open');
+    }
+  });
 </script>
 </body>
 </html>
