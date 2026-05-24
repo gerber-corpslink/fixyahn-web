@@ -139,6 +139,7 @@
   <ul class="nav-links">
     <li><a href="index.html">Inicio</a></li>
     <li><a href="servicios.html">Servicios</a></li>
+    <li><a href="ingenieria.html">Ingenier&iacute;a</a></li>
     <li><a href="nosotros.html">Nosotros</a></li>
     <li><a href="contacto.html" class="active">Contacto</a></li>
   </ul>
@@ -151,6 +152,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Inicio</a>
   <a href="servicios.html">Servicios</a>
+  <a href="ingenieria.html">Ingenier&iacute;a</a>
   <a href="nosotros.html">Nosotros</a>
   <a href="contacto.html">Contacto</a>
   <a href="https://wa.me/50498481179?text=Hola%20FixYa" class="mobile-wa" target="_blank"><i class="fab fa-whatsapp"></i> Solicitar servicio por WhatsApp</a>
@@ -194,6 +196,11 @@
             <div class="cm-body"><strong>Recursos Humanos / T&eacute;cnicos</strong><span>rrhhfixya@fixyahn.com</span></div>
           </a>
 
+          <a href="mailto:ingenieria@fixyahn.com" class="contact-method">
+            <div class="cm-icon" style="background:#EFF6FF;color:#1D4ED8"><i class="fas fa-hard-hat"></i></div>
+            <div class="cm-body"><strong>Ingenier&iacute;a & Proyectos</strong><span>ingenieria@fixyahn.com &mdash; Proyectos industriales y llave en mano</span></div>
+          </a>
+
           <div class="contact-method" style="cursor:default">
             <div class="cm-icon map"><i class="fas fa-map-marker-alt"></i></div>
             <div class="cm-body"><strong>&Aacute;rea de cobertura</strong><span>Tegucigalpa y Comayag&uuml;ela, Francisco Moraz&aacute;n</span></div>
@@ -221,8 +228,17 @@
             <input type="email" placeholder="tucorreo@ejemplo.com" />
           </div>
           <div class="form-group">
-            <label>Tipo de servicio</label>
-            <select required>
+            <label>Tipo de solicitud</label>
+            <select id="tipo_solicitud" onchange="toggleSchedule()" required>
+              <option value="">Selecciona el tipo</option>
+              <option value="emergencia">🚨 Emergencia &mdash; Necesito atenci&oacute;n hoy</option>
+              <option value="programado">📅 Trabajo programado &mdash; Elijo fecha y hora</option>
+              <option value="proyecto">🏗️ Proyecto de Ingenier&iacute;a &mdash; Gran escala</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Servicio espec&iacute;fico</label>
+            <select id="tipo_servicio" required>
               <option value="">Selecciona el servicio</option>
               <option>Aire Acondicionado &mdash; Instalaci&oacute;n</option>
               <option>Aire Acondicionado &mdash; Mantenimiento</option>
@@ -230,8 +246,29 @@
               <option>Refrigeraci&oacute;n &mdash; Dom&eacute;stica</option>
               <option>Refrigeraci&oacute;n &mdash; Comercial</option>
               <option>Cuarto Fr&iacute;o</option>
+              <option>Instalaci&oacute;n Industrial A/C</option>
+              <option>Proyecto Llave en Mano</option>
               <option>Otro / No s&eacute; a&uacute;n</option>
             </select>
+          </div>
+          <div id="schedule_fields" style="display:none;background:#F0F6FF;border-radius:12px;padding:1.2rem;margin-bottom:1.2rem;border:1.5px solid #BFDBFE">
+            <p style="font-size:.82rem;font-weight:600;color:#1D4ED8;margin-bottom:.8rem"><i class="fas fa-calendar-check"></i> Programar fecha y hora</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
+              <div>
+                <label style="display:block;font-size:.82rem;font-weight:600;color:#334155;margin-bottom:.3rem">Fecha preferida</label>
+                <input type="date" id="sched_fecha" style="width:100%;padding:.65rem .9rem;border:1.5px solid #E2E8F0;border-radius:9px;font-family:Inter,sans-serif;font-size:.88rem;outline:none"/>
+              </div>
+              <div>
+                <label style="display:block;font-size:.82rem;font-weight:600;color:#334155;margin-bottom:.3rem">Horario</label>
+                <select id="sched_hora" style="width:100%;padding:.65rem .9rem;border:1.5px solid #E2E8F0;border-radius:9px;font-family:Inter,sans-serif;font-size:.88rem;outline:none">
+                  <option value="">Selecciona</option>
+                  <option>8:00 &ndash; 10:00 AM</option>
+                  <option>10:00 AM &ndash; 12:00 PM</option>
+                  <option>1:00 &ndash; 3:00 PM</option>
+                  <option>3:00 &ndash; 5:00 PM</option>
+                </select>
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Colonia / Sector en Tegucigalpa</label>
@@ -310,7 +347,7 @@
     </ul></div>
     <div class="footer-col"><h4>Contacto</h4><ul>
       <li><a href="https://wa.me/50498481179" target="_blank"><i class="fab fa-whatsapp"></i> +504 9848-1179</a></li>
-      <li><a href="mailto:infofixya@fixyahn.com">infofixya@fixyahn.com</a></li>
+      <li><a href="mailto:infofixya@fixyahn.com">infofixya@fixyahn.com</a></li><li><a href="mailto:ingenieria@fixyahn.com"><i class="fas fa-hard-hat"></i> Ingenier&iacute;a</a></li>
       <li><a href="mailto:soportefixya@fixyahn.com">soportefixya@fixyahn.com</a></li>
       <li><a href="mailto:rrhhfixya@fixyahn.com">rrhhfixya@fixyahn.com</a></li>
     </ul></div>
@@ -322,6 +359,46 @@
 </footer>
 
 <script>
+  function toggleSchedule(){
+    var val=document.getElementById('tipo_solicitud').value;
+    var sf=document.getElementById('schedule_fields');
+    sf.style.display=(val==='programado')?'block':'none';
+    if(val==='proyecto') window.location.href='ingenieria.html#solicitar';
+  }
+  function handleSubmit(e){
+    e.preventDefault();
+    var nombre=document.querySelector('input[placeholder="Tu nombre"]').value||'';
+    var tel=document.querySelector('input[type="tel"]').value||'';
+    var tipo=document.getElementById('tipo_solicitud')?document.getElementById('tipo_solicitud').value:'';
+    var srv=document.getElementById('tipo_servicio')?document.getElementById('tipo_servicio').value:'';
+    var zona=document.querySelector('input[placeholder="Ej: Colonia Kennedy, Centro, etc."]')?document.querySelector('input[placeholder="Ej: Colonia Kennedy, Centro, etc."]').value:'';
+    var desc=document.querySelector('textarea')?document.querySelector('textarea').value:'';
+    var fecha=document.getElementById('sched_fecha')?document.getElementById('sched_fecha').value:'';
+    var hora=document.getElementById('sched_hora')?document.getElementById('sched_hora').value:'';
+    var tipoLabel={'emergencia':'🚨 EMERGENCIA','programado':'📅 TRABAJO PROGRAMADO','proyecto':'🏗️ PROYECTO DE INGENIERÍA'}[tipo]||tipo;
+    var msg='📋 *SOLICITUD DE SERVICIO — FIXYAHN*
+
+'
+      +'👤 *Nombre:* '+nombre+'
+'
+      +'📞 *Teléfono:* '+tel+'
+'
+      +(tipo?'📌 *Tipo:* '+tipoLabel+'
+':'')
+      +(srv?'🔧 *Servicio:* '+srv+'
+':'')
+      +(zona?'📍 *Zona:* '+zona+'
+':'')
+      +(fecha?'📅 *Fecha:* '+fecha+(hora?' — '+hora:'')+'
+':'')
+      +(desc?'
+📝 *Descripción:*
+'+desc:'');
+    window.open('https://wa.me/50498481179?text='+encodeURIComponent(msg),'_blank');
+  }
+  // Fecha mínima mañana
+  var sf=document.getElementById('sched_fecha');
+  if(sf){var t=new Date();t.setDate(t.getDate()+1);sf.min=t.toISOString().split('T')[0]}
   var ham = document.getElementById('ham');
   var menu = document.getElementById('mobileMenu');
   ham.addEventListener('click', function() {

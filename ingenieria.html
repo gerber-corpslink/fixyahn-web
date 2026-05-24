@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ingeniería & Proyectos — FixYa Honduras</title>
+  <meta name="description" content="Departamento de Ingeniería FixYa: proyectos de instalación industrial de A/C, cuartos fríos de gran escala y proyectos llave en mano en Honduras."/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --blue:#1A56DB;--blue-d:#1E3A5F;--blue-l:#EBF2FF;--blue-m:#2563EB;
+      --gold:#F5A623;--gold-d:#D4891A;--gold-l:#FFF8E7;
+      --white:#fff;--off:#F8FAFC;--gray:#E2E8F0;
+      --t1:#0F172A;--t2:#334155;--t3:#64748B;
+      --green:#25D366;--green-d:#1ebe5d;
+      --r:12px;--r-lg:20px;
+      --sh:0 4px 20px rgba(0,0,0,.08);--sh-lg:0 16px 48px rgba(0,0,0,.14);
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;color:var(--t1);background:var(--white);overflow-x:hidden}
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--gray);height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;transition:box-shadow .3s}
+    nav.scrolled{box-shadow:var(--sh)}
+    .nav-logo{text-decoration:none;display:flex;align-items:center;gap:2px}
+    .logo-fix{font-size:1.7rem;font-weight:900;color:var(--t1);letter-spacing:-1.5px}
+    .logo-ya{font-size:1.7rem;font-weight:900;color:var(--gold);letter-spacing:-1.5px}
+    .nav-center{display:flex;gap:2rem;list-style:none}
+    .nav-center a{text-decoration:none;color:var(--t2);font-weight:500;font-size:.93rem;transition:color .2s}
+    .nav-center a:hover,.nav-center a.active{color:var(--blue);font-weight:700}
+    .nav-right{display:flex;align-items:center;gap:.8rem}
+    .nav-wa{display:flex;align-items:center;gap:.5rem;background:var(--green);color:#fff;padding:.55rem 1.2rem;border-radius:50px;font-weight:700;font-size:.88rem;text-decoration:none;transition:all .2s;white-space:nowrap}
+    .nav-wa:hover{background:var(--green-d);transform:translateY(-1px)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+    .hamburger span{display:block;width:24px;height:2.5px;background:var(--t1);border-radius:2px;transition:all .3s}
+    .hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+    .mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;z-index:190;background:#fff;border-bottom:2px solid var(--gray);padding:1.5rem 5%;flex-direction:column;gap:1rem;box-shadow:0 8px 32px rgba(0,0,0,.1)}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{text-decoration:none;color:var(--t1);font-weight:600;font-size:1.05rem;padding:.5rem 0;border-bottom:1px solid var(--gray)}
+    .mobile-menu a:last-child{border:none}
+    .mobile-wa{display:flex;align-items:center;justify-content:center;gap:.6rem;background:var(--green);color:#fff;padding:.9rem;border-radius:12px;font-weight:700;font-size:1rem;text-decoration:none;margin-top:.5rem}
+    @media(max-width:960px){.nav-center{display:none}.hamburger{display:flex}.nav-wa{display:none}}
+    .wa-float{position:fixed;bottom:28px;right:24px;z-index:300;display:flex;align-items:center;gap:.6rem;background:var(--green);color:#fff;padding:.85rem 1.4rem;border-radius:50px;font-weight:700;font-size:1rem;text-decoration:none;box-shadow:0 8px 28px rgba(37,211,102,.5);transition:all .25s;animation:pulse-wa 2.5s infinite}
+    .wa-float:hover{background:var(--green-d);transform:translateY(-3px) scale(1.04);animation:none}
+    .wa-float i{font-size:1.3rem}
+    @keyframes pulse-wa{0%,100%{box-shadow:0 8px 28px rgba(37,211,102,.5)}50%{box-shadow:0 8px 36px rgba(37,211,102,.75),0 0 0 8px rgba(37,211,102,.15)}}
+    @media(max-width:600px){.wa-float{padding:.8rem 1rem;bottom:20px;right:16px}.wa-float .wa-label{display:none}}
+    .page-hero{padding:120px 5% 90px;background:linear-gradient(135deg,#050E1F 0%,#0D2444 40%,#0D3B6E 75%,#1A56DB 100%);position:relative;overflow:hidden;text-align:center}
+    .page-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1800&q=70') center/cover;opacity:.1}
+    .page-hero>*{position:relative;z-index:1}
+    .hero-deco{position:absolute;width:500px;height:500px;border-radius:50%;background:rgba(26,86,219,.15);top:-150px;right:-100px;pointer-events:none;z-index:0}
+    .ph-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(245,166,35,.2);border:1px solid rgba(245,166,35,.45);color:var(--gold);padding:.4rem 1.1rem;border-radius:50px;font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:1.5rem}
+    .page-hero h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1.2rem;letter-spacing:-1px}
+    .page-hero h1 span{color:var(--gold)}
+    .page-hero p{font-size:1.1rem;color:rgba(255,255,255,.78);max-width:680px;margin:0 auto 2.5rem;line-height:1.75}
+    .hero-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+    .btn-gold-hero{display:inline-flex;align-items:center;gap:.6rem;background:var(--gold);color:var(--t1);padding:1rem 2.2rem;border-radius:50px;font-weight:800;font-size:1.05rem;text-decoration:none;transition:all .2s;box-shadow:0 8px 24px rgba(245,166,35,.4)}
+    .btn-gold-hero:hover{background:var(--gold-d);transform:translateY(-2px)}
+    .btn-outline-hero{display:inline-flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.3);color:#fff;padding:1rem 2.2rem;border-radius:50px;font-weight:600;font-size:1.05rem;text-decoration:none;transition:all .2s}
+    .btn-outline-hero:hover{background:rgba(255,255,255,.18)}
+    .hero-stats{display:flex;justify-content:center;gap:4rem;margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.12);flex-wrap:wrap}
+    .hs strong{display:block;font-size:2rem;font-weight:900;color:var(--gold);line-height:1}
+    .hs span{font-size:.82rem;color:rgba(255,255,255,.6);margin-top:.3rem;display:block}
+    .sec{padding:5.5rem 5%}
+    .sec-alt{background:var(--off)}
+    .container{max-width:1200px;margin:0 auto}
+    .sec-label{display:inline-flex;align-items:center;gap:.4rem;background:var(--blue-l);color:var(--blue);padding:.35rem .9rem;border-radius:50px;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem}
+    .sec-title{font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:900;line-height:1.15;color:var(--t1);letter-spacing:-.5px}
+    .sec-sub{color:var(--t3);font-size:1rem;line-height:1.75;margin-top:.8rem;max-width:620px}
+    .diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem}
+    .diff-card{border-radius:var(--r-lg);padding:2.5rem;border:2px solid var(--gray);transition:all .25s}
+    .diff-card.regular{background:var(--white)}
+    .diff-card.eng{background:linear-gradient(135deg,#050E1F,#0D2444);border-color:#1A56DB}
+    .diff-card:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+    .diff-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .9rem;border-radius:50px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1.2rem}
+    .diff-badge.op{background:#DCFCE7;color:#15803D}
+    .diff-badge.proj{background:rgba(245,166,35,.2);color:var(--gold)}
+    .diff-card h3{font-size:1.4rem;font-weight:800;margin-bottom:.8rem}
+    .diff-card.regular h3{color:var(--t1)}
+    .diff-card.eng h3{color:#fff}
+    .diff-card ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.8rem}
+    .diff-card.regular ul li{font-size:.9rem;color:var(--t2);padding-left:1.5rem;position:relative}
+    .diff-card.regular ul li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700}
+    .diff-card.eng ul li{font-size:.9rem;color:rgba(255,255,255,.8);padding-left:1.5rem;position:relative}
+    .diff-card.eng ul li::before{content:'◆';position:absolute;left:0;color:var(--gold);font-size:.65rem;top:.25rem}
+    .btn-wa-sm{display:inline-flex;align-items:center;gap:.5rem;background:var(--green);color:#fff;padding:.8rem 1.6rem;border-radius:50px;font-weight:700;font-size:.9rem;text-decoration:none;transition:all .2s}
+    .btn-wa-sm:hover{background:var(--green-d);transform:translateY(-2px)}
+    .btn-eng{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--t1);padding:.8rem 1.6rem;border-radius:50px;font-weight:700;font-size:.9rem;text-decoration:none;transition:all .2s}
+    .btn-eng:hover{background:var(--gold-d);transform:translateY(-2px)}
+    .eng-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3.5rem}
+    .eng-card{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh);transition:all .3s;background:var(--white);border:1.5px solid var(--gray)}
+    .eng-card:hover{transform:translateY(-8px);box-shadow:var(--sh-lg);border-color:var(--blue)}
+    .eng-card-top{padding:2.2rem 2rem 1.5rem;background:linear-gradient(135deg,#050E1F,#0D3B6E);position:relative;overflow:hidden}
+    .eng-card-top::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(26,86,219,.4),transparent 70%)}
+    .eng-icon-wrap{width:60px;height:60px;border-radius:16px;background:rgba(245,166,35,.2);border:1px solid rgba(245,166,35,.35);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;position:relative;z-index:1}
+    .eng-icon-wrap i{color:var(--gold);font-size:1.5rem}
+    .eng-card-top h3{font-size:1.15rem;font-weight:800;color:#fff;margin-bottom:.5rem;position:relative;z-index:1}
+    .eng-card-top p{font-size:.84rem;color:rgba(255,255,255,.65);line-height:1.6;position:relative;z-index:1}
+    .eng-card-body{padding:1.5rem 2rem}
+    .eng-features{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.2rem}
+    .eng-features li{font-size:.85rem;color:var(--t2);padding-left:1.4rem;position:relative}
+    .eng-features li::before{content:'→';position:absolute;left:0;color:var(--blue);font-weight:700}
+    .eng-tag{display:inline-flex;align-items:center;gap:.3rem;background:var(--blue-l);color:var(--blue);padding:.25rem .7rem;border-radius:50px;font-size:.7rem;font-weight:700}
+    .process-section{background:linear-gradient(135deg,#050E1F,#0D2444)}
+    .process-section .sec-label{background:rgba(255,255,255,.12);color:rgba(255,255,255,.9)}
+    .process-section .sec-title{color:#fff}
+    .process-section .sec-sub{color:rgba(255,255,255,.6)}
+    .proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3.5rem;position:relative}
+    .proc-grid::before{content:'';position:absolute;top:36px;left:12.5%;right:12.5%;height:2px;background:rgba(255,255,255,.12);z-index:0}
+    .proc-step{text-align:center;position:relative;z-index:1}
+    .proc-num{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-d));color:var(--t1);display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:900;margin:0 auto 1.4rem;box-shadow:0 8px 24px rgba(245,166,35,.45)}
+    .proc-step h3{font-size:.98rem;font-weight:700;color:#fff;margin-bottom:.5rem}
+    .proc-step p{font-size:.83rem;color:rgba(255,255,255,.6);line-height:1.65}
+    .why-eng{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:3rem}
+    .why-eng-text h2{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;line-height:1.15;letter-spacing:-.5px;margin-bottom:1rem}
+    .why-eng-text p{color:var(--t3);font-size:1rem;line-height:1.75;margin-bottom:2rem}
+    .why-list{display:flex;flex-direction:column;gap:1rem}
+    .why-item{display:flex;gap:1rem;align-items:flex-start}
+    .wi-icon{width:44px;height:44px;border-radius:12px;background:var(--blue-l);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .wi-icon i{color:var(--blue);font-size:1.1rem}
+    .wi-body strong{display:block;font-size:.95rem;font-weight:700;color:var(--t1);margin-bottom:.2rem}
+    .wi-body span{font-size:.86rem;color:var(--t3);line-height:1.5}
+    .why-eng-visual{background:linear-gradient(135deg,#050E1F,#0D3B6E);border-radius:var(--r-lg);padding:2.5rem;display:flex;flex-direction:column;gap:1.2rem}
+    .wev-stat{display:flex;align-items:center;gap:1.2rem;background:rgba(255,255,255,.07);border-radius:var(--r);padding:1.2rem 1.5rem;border:1px solid rgba(255,255,255,.1)}
+    .wev-num{font-size:2rem;font-weight:900;color:var(--gold);line-height:1;min-width:70px}
+    .wev-label{font-size:.88rem;color:rgba(255,255,255,.75);line-height:1.45}
+    .form-section{background:var(--off)}
+    .form-wrap{background:var(--white);border-radius:var(--r-lg);box-shadow:var(--sh-lg);border:1px solid var(--gray);overflow:hidden;max-width:780px;margin:3rem auto 0}
+    .form-header{background:linear-gradient(135deg,#050E1F,#0D3B6E);padding:2.5rem 2.5rem 2rem}
+    .form-header h3{font-size:1.5rem;font-weight:800;color:#fff;margin-bottom:.4rem}
+    .form-header p{font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.6}
+    .form-body{padding:2.5rem}
+    .f-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+    .f-group{margin-bottom:1.3rem}
+    .f-group label{display:block;font-size:.84rem;font-weight:600;color:var(--t2);margin-bottom:.4rem}
+    .f-group label .req{color:var(--blue)}
+    .f-group input,.f-group select,.f-group textarea{width:100%;padding:.78rem 1rem;border:1.5px solid var(--gray);border-radius:10px;font-family:'Inter',sans-serif;font-size:.93rem;color:var(--t1);background:var(--white);outline:none;transition:border-color .2s}
+    .f-group input:focus,.f-group select:focus,.f-group textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,219,.08)}
+    .f-group textarea{resize:vertical;min-height:110px}
+    .date-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+    .date-note{font-size:.78rem;color:var(--t3);margin-top:.3rem}
+    .f-submit{width:100%;padding:.95rem;background:linear-gradient(135deg,#0D3B6E,var(--blue));color:#fff;border:none;border-radius:50px;font-family:'Inter',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.6rem;margin-top:.5rem}
+    .f-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,86,219,.4)}
+    .f-note{text-align:center;font-size:.78rem;color:var(--t3);margin-top:.8rem}
+    .f-note a{color:var(--blue)}
+    .cta-strip{background:linear-gradient(135deg,var(--gold),#E8920F);padding:5rem 5%;text-align:center}
+    .cta-strip h2{font-size:clamp(1.9rem,3.5vw,2.6rem);font-weight:900;color:var(--t1);margin-bottom:.7rem;letter-spacing:-.5px}
+    .cta-strip p{color:rgba(15,23,42,.72);font-size:1rem;margin-bottom:2.5rem}
+    .cta-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+    .btn-dark{display:inline-flex;align-items:center;gap:.6rem;background:var(--t1);color:#fff;padding:1rem 2.2rem;border-radius:50px;font-weight:800;font-size:1rem;text-decoration:none;transition:all .2s}
+    .btn-dark:hover{background:#1E293B;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+    .btn-mail{display:inline-flex;align-items:center;gap:.6rem;background:#fff;color:var(--t1);padding:1rem 2.2rem;border-radius:50px;font-weight:800;font-size:1rem;text-decoration:none;transition:all .2s}
+    .btn-mail:hover{background:var(--off);transform:translateY(-2px)}
+    footer{background:var(--t1);padding:4rem 5% 2rem}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1200px;margin:0 auto}
+    .footer-brand p{font-size:.88rem;color:rgba(255,255,255,.55);margin-top:.8rem;line-height:1.7;max-width:260px}
+    .social{display:flex;gap:.7rem;margin-top:1.2rem}
+    .social a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:.9rem;transition:background .2s}
+    .social a:hover{background:var(--gold)}
+    .footer-col h4{color:#fff;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.2rem}
+    .footer-col ul{list-style:none}
+    .footer-col ul li{margin-bottom:.55rem}
+    .footer-col ul li a{color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem;transition:color .2s}
+    .footer-col ul li a:hover{color:var(--gold)}
+    .footer-logo{text-decoration:none;display:inline-flex;margin-bottom:.6rem}
+    .fl-fix{font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-1px}
+    .fl-ya{font-size:1.5rem;font-weight:900;color:var(--gold);letter-spacing:-1px}
+    .footer-bottom{max-width:1200px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.8rem;color:rgba(255,255,255,.4)}
+    @media(max-width:960px){.diff-grid{grid-template-columns:1fr}.eng-grid{grid-template-columns:1fr 1fr}.proc-grid{grid-template-columns:1fr 1fr;gap:2rem}.proc-grid::before{display:none}.why-eng{grid-template-columns:1fr}.why-eng-visual{display:none}.footer-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:600px){.eng-grid{grid-template-columns:1fr}.proc-grid{grid-template-columns:1fr}.f-row,.date-row{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.hero-btns{flex-direction:column;align-items:center}.hero-stats{gap:2rem}}
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo"><span class="logo-fix">Fix</span><span class="logo-ya">Ya</span></a>
+  <ul class="nav-center">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="servicios.html">Servicios</a></li>
+    <li><a href="ingenieria.html" class="active">Ingenier&iacute;a</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#solicitar" class="nav-wa" style="background:var(--blue-d)"><i class="fas fa-hard-hat"></i> Solicitar proyecto</a>
+    <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Inicio</a>
+  <a href="servicios.html">Servicios</a>
+  <a href="ingenieria.html">Ingenier&iacute;a</a>
+  <a href="nosotros.html">Nosotros</a>
+  <a href="contacto.html">Contacto</a>
+  <a href="#solicitar" class="mobile-wa" style="background:var(--blue-d)"><i class="fas fa-hard-hat"></i> Solicitar proyecto de ingenier&iacute;a</a>
+</div>
+<a href="https://wa.me/50498481179?text=Hola%20FixYa,%20necesito%20informaci%C3%B3n%20sobre%20un%20proyecto%20de%20ingenier%C3%ADa" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i><span class="wa-label">Proyectos</span></a>
+
+<section class="page-hero">
+  <div class="hero-deco"></div>
+  <div class="ph-badge"><i class="fas fa-hard-hat"></i> Departamento de Ingenier&iacute;a</div>
+  <h1>Proyectos t&eacute;cnicos<br/><span>de gran escala</span></h1>
+  <p>Cuando el trabajo requiere ingenier&iacute;a, dise&ntilde;o y ejecuci&oacute;n profesional, entra en acci&oacute;n el Departamento de Ingenier&iacute;a FixYa. Instalaciones industriales, cuartos fr&iacute;os y proyectos llave en mano en Honduras.</p>
+  <div class="hero-btns">
+    <a href="#solicitar" class="btn-gold-hero"><i class="fas fa-file-alt"></i> Solicitar cotizaci&oacute;n</a>
+    <a href="#especialidades" class="btn-outline-hero"><i class="fas fa-tools"></i> Ver especialidades</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hs"><strong>100%</strong><span>Proyectos propios</span></div>
+    <div class="hs"><strong>Llave</strong><span>en mano</span></div>
+    <div class="hs"><strong>Garant&iacute;a</strong><span>incluida</span></div>
+  </div>
+</section>
+
+<!-- DIFERENCIA SERVICIO vs PROYECTO -->
+<section class="sec sec-alt">
+  <div class="container">
+    <span class="sec-label"><i class="fas fa-balance-scale"></i> &iquest;Qu&eacute; necesitas?</span>
+    <h2 class="sec-title">&iquest;Servicio t&eacute;cnico o<br/>proyecto de ingenier&iacute;a?</h2>
+    <p class="sec-sub">Tenemos la capacidad para ambos. Conoce cu&aacute;l aplica a tu caso.</p>
+    <div class="diff-grid">
+      <div class="diff-card regular">
+        <span class="diff-badge op"><i class="fas fa-bolt"></i> Servicio t&eacute;cnico</span>
+        <h3>Mantenimiento y reparaci&oacute;n</h3>
+        <ul>
+          <li>A/C residencial o comercial peque&ntilde;o</li>
+          <li>Reparaciones y diagn&oacute;sticos en campo</li>
+          <li>Mantenimiento preventivo programado</li>
+          <li>Equipos individuales o sistemas peque&ntilde;os</li>
+          <li>Respuesta r&aacute;pida: mismo d&iacute;a o agendado</li>
+        </ul>
+        <a href="https://wa.me/50498481179?text=Hola%20FixYa,%20necesito%20un%20servicio%20t%C3%A9cnico" class="btn-wa-sm" target="_blank"><i class="fab fa-whatsapp"></i> Solicitar servicio</a>
+      </div>
+      <div class="diff-card eng">
+        <span class="diff-badge proj"><i class="fas fa-hard-hat"></i> Proyecto de ingenier&iacute;a</span>
+        <h3>Instalaci&oacute;n y dise&ntilde;o a gran escala</h3>
+        <ul>
+          <li>Sistemas de climatizaci&oacute;n industrial</li>
+          <li>Cuartos fr&iacute;os nuevos o expansiones</li>
+          <li>Proyectos multi-equipo o multi-zona</li>
+          <li>Dise&ntilde;o, instalaci&oacute;n y comisionamiento</li>
+          <li>Proyectos llave en mano con garant&iacute;a</li>
+        </ul>
+        <a href="#solicitar" class="btn-eng"><i class="fas fa-file-alt"></i> Solicitar cotizaci&oacute;n</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPECIALIDADES -->
+<section class="sec" id="especialidades">
+  <div class="container">
+    <span class="sec-label"><i class="fas fa-cogs"></i> Especialidades</span>
+    <h2 class="sec-title">Lo que hace el<br/>Departamento de Ingenier&iacute;a</h2>
+    <p class="sec-sub">Proyectos ejecutados con estudio t&eacute;cnico previo, materiales certificados y garant&iacute;a de funcionamiento.</p>
+    <div class="eng-grid">
+      <div class="eng-card">
+        <div class="eng-card-top">
+          <div class="eng-icon-wrap"><i class="fas fa-building"></i></div>
+          <h3>Instalaciones Industriales de A/C</h3>
+          <p>Sistemas de climatizaci&oacute;n para plantas, bodegas, centros comerciales y edificios corporativos.</p>
+        </div>
+        <div class="eng-card-body">
+          <ul class="eng-features">
+            <li>Sistemas centralizados y manejadoras de aire</li>
+            <li>Fan coils, cassettes y VRF multi-zona</li>
+            <li>C&aacute;lculo de carga t&eacute;rmica y dise&ntilde;o</li>
+            <li>Instalaci&oacute;n de ductos y difusores</li>
+            <li>Pruebas y comisionamiento del sistema</li>
+          </ul>
+          <span class="eng-tag"><i class="fas fa-check-circle"></i> Proyectos llave en mano</span>
+        </div>
+      </div>
+      <div class="eng-card">
+        <div class="eng-card-top">
+          <div class="eng-icon-wrap"><i class="fas fa-warehouse"></i></div>
+          <h3>Cuartos Fr&iacute;os de Gran Escala</h3>
+          <p>Dise&ntilde;o e instalaci&oacute;n de c&aacute;maras frigor&iacute;ficas para la industria alimentaria, farmac&eacute;utica y log&iacute;stica.</p>
+        </div>
+        <div class="eng-card-body">
+          <ul class="eng-features">
+            <li>C&aacute;maras de refrigeraci&oacute;n y congelaci&oacute;n</li>
+            <li>Paneles s&aacute;ndwich aislantes certificados</li>
+            <li>Sistemas frigor&iacute;ficos industriales</li>
+            <li>Control autom&aacute;tico de temperatura</li>
+            <li>Capacidades desde 20 m&sup2; hasta proyectos mayores</li>
+          </ul>
+          <span class="eng-tag"><i class="fas fa-thermometer-half"></i> Temperatura controlada</span>
+        </div>
+      </div>
+      <div class="eng-card">
+        <div class="eng-card-top">
+          <div class="eng-icon-wrap"><i class="fas fa-project-diagram"></i></div>
+          <h3>Proyectos Llave en Mano</h3>
+          <p>Desde el levantamiento hasta la entrega final: nos encargamos de todo, t&uacute; solo apruebas el resultado.</p>
+        </div>
+        <div class="eng-card-body">
+          <ul class="eng-features">
+            <li>Levantamiento t&eacute;cnico y dise&ntilde;o del sistema</li>
+            <li>Gesti&oacute;n de materiales y equipos</li>
+            <li>Coordinaci&oacute;n de cuadrillas especializadas</li>
+            <li>Pruebas, comisionamiento y entrega</li>
+            <li>Garant&iacute;a de operaci&oacute;n post-instalaci&oacute;n</li>
+          </ul>
+          <span class="eng-tag"><i class="fas fa-key"></i> Entrega completa</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="sec process-section">
+  <div class="container">
+    <span class="sec-label"><i class="fas fa-list-ol"></i> C&oacute;mo funciona</span>
+    <h2 class="sec-title">Del contacto inicial<br/>a la entrega del proyecto</h2>
+    <p class="sec-sub">Un proceso claro y transparente en 4 etapas. Sin sorpresas, sin letras peque&ntilde;as.</p>
+    <div class="proc-grid">
+      <div class="proc-step">
+        <div class="proc-num">1</div>
+        <h3>Consulta inicial</h3>
+        <p>Nos describes el proyecto: espacio, capacidad, uso del sistema, plazos. Sin costo ni compromiso.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">2</div>
+        <h3>Levantamiento t&eacute;cnico</h3>
+        <p>Visitamos el lugar para medir, calcular carga t&eacute;rmica y definir el sistema &oacute;ptimo para tu proyecto.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">3</div>
+        <h3>Propuesta y aprobaci&oacute;n</h3>
+        <p>Recibes una propuesta t&eacute;cnica-econ&oacute;mica detallada. T&uacute; decides si procedes. Ajustamos si es necesario.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">4</div>
+        <h3>Ejecuci&oacute;n y entrega</h3>
+        <p>Instalamos con cuadrillas propias, hacemos pruebas y te entregamos el sistema operando al 100%.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUÉ INGENIERÍA -->
+<section class="sec">
+  <div class="container">
+    <div class="why-eng">
+      <div class="why-eng-text">
+        <span class="sec-label"><i class="fas fa-award"></i> Ventajas</span>
+        <h2>Por qu&eacute; confiar el proyecto<br/>a Ingenier&iacute;a FixYa</h2>
+        <p>No somos intermediarios. Somos los ingenieros que dise&ntilde;an, gestionan y ejecutan tu proyecto de principio a fin.</p>
+        <div class="why-list">
+          <div class="why-item">
+            <div class="wi-icon"><i class="fas fa-drafting-compass"></i></div>
+            <div class="wi-body"><strong>Dise&ntilde;o t&eacute;cnico propio</strong><span>C&aacute;lculo de cargas, selecci&oacute;n de equipos y dise&ntilde;o del sistema antes de presupuestar.</span></div>
+          </div>
+          <div class="why-item">
+            <div class="wi-icon"><i class="fas fa-users-cog"></i></div>
+            <div class="wi-body"><strong>Ejecuci&oacute;n directa</strong><span>No subcontratamos partes cr&iacute;ticas. El equipo de FixYa ejecuta desde el inicio hasta la entrega.</span></div>
+          </div>
+          <div class="why-item">
+            <div class="wi-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="wi-body"><strong>Garant&iacute;a de operaci&oacute;n</strong><span>Incluimos garant&iacute;a sobre la instalaci&oacute;n y acompa&ntilde;amiento post-entrega sin costo adicional.</span></div>
+          </div>
+          <div class="why-item">
+            <div class="wi-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+            <div class="wi-body"><strong>Precio justo y transparente</strong><span>Cotizaci&oacute;n detallada con desglose de materiales, mano de obra y equipos. Sin sorpresas.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="why-eng-visual">
+        <div class="wev-stat">
+          <div class="wev-num">100%</div>
+          <div class="wev-label">Proyectos ejecutados<br/>con equipo propio FixYa</div>
+        </div>
+        <div class="wev-stat">
+          <div class="wev-num">4</div>
+          <div class="wev-label">Etapas claras:<br/>consulta → dise&ntilde;o → propuesta → entrega</div>
+        </div>
+        <div class="wev-stat">
+          <div class="wev-num">3</div>
+          <div class="wev-label">Especialidades de<br/>ingenier&iacute;a disponibles</div>
+        </div>
+        <div class="wev-stat">
+          <div class="wev-num">✓</div>
+          <div class="wev-label">Garant&iacute;a incluida<br/>en todos los proyectos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULARIO -->
+<section class="sec form-section" id="solicitar">
+  <div class="container">
+    <div style="text-align:center;max-width:600px;margin:0 auto">
+      <span class="sec-label"><i class="fas fa-file-alt"></i> Solicitud de proyecto</span>
+      <h2 class="sec-title">Solicita tu cotizaci&oacute;n<br/>de ingenier&iacute;a</h2>
+      <p class="sec-sub" style="margin:0 auto">Completa el formulario y el Departamento de Ingenier&iacute;a FixYa te responde en menos de 24 horas h&aacute;biles.</p>
+    </div>
+    <div class="form-wrap">
+      <div class="form-header">
+        <h3><i class="fas fa-hard-hat" style="color:var(--gold);margin-right:.5rem"></i> Solicitud de Proyecto de Ingenier&iacute;a</h3>
+        <p>Cuanta m&aacute;s informaci&oacute;n nos brindes, mejor y m&aacute;s r&aacute;pido podremos preparar tu propuesta t&eacute;cnica.</p>
+      </div>
+      <div class="form-body">
+        <form id="engForm">
+          <div class="f-row">
+            <div class="f-group">
+              <label>Nombre completo <span class="req">*</span></label>
+              <input type="text" id="eng_nombre" placeholder="Tu nombre" required/>
+            </div>
+            <div class="f-group">
+              <label>Empresa / Organizaci&oacute;n</label>
+              <input type="text" id="eng_empresa" placeholder="Nombre de tu empresa (opcional)"/>
+            </div>
+          </div>
+          <div class="f-row">
+            <div class="f-group">
+              <label>Tel&eacute;fono / WhatsApp <span class="req">*</span></label>
+              <input type="tel" id="eng_tel" placeholder="+504 XXXX-XXXX" required/>
+            </div>
+            <div class="f-group">
+              <label>Correo electr&oacute;nico <span class="req">*</span></label>
+              <input type="email" id="eng_email" placeholder="tucorreo@ejemplo.com" required/>
+            </div>
+          </div>
+          <div class="f-group">
+            <label>Tipo de proyecto <span class="req">*</span></label>
+            <select id="eng_tipo" required>
+              <option value="">Selecciona el tipo de proyecto</option>
+              <option value="AC Industrial">A/C Industrial &mdash; Sistema centralizado o multi-zona</option>
+              <option value="Cuarto Frío">Cuarto Fr&iacute;o &mdash; Refrigeraci&oacute;n o congelaci&oacute;n</option>
+              <option value="Llave en mano">Proyecto Llave en Mano &mdash; Dise&ntilde;o + instalaci&oacute;n completa</option>
+              <option value="Expansión">Expansi&oacute;n de sistema existente</option>
+              <option value="Otro">Otro tipo de proyecto</option>
+            </select>
+          </div>
+          <div class="f-group">
+            <label>Ubicaci&oacute;n del proyecto <span class="req">*</span></label>
+            <input type="text" id="eng_ubicacion" placeholder="Colonia, sector o direcci&oacute;n en Tegucigalpa" required/>
+          </div>
+          <div class="f-row">
+            <div class="f-group">
+              <label>Tama&ntilde;o aproximado del espacio</label>
+              <select id="eng_tamano">
+                <option value="">Selecciona un rango</option>
+                <option value="Menos de 50 m²">Menos de 50 m&sup2;</option>
+                <option value="50 – 150 m²">50 &ndash; 150 m&sup2;</option>
+                <option value="150 – 500 m²">150 &ndash; 500 m&sup2;</option>
+                <option value="500 – 1,000 m²">500 &ndash; 1,000 m&sup2;</option>
+                <option value="Más de 1,000 m²">M&aacute;s de 1,000 m&sup2;</option>
+              </select>
+            </div>
+            <div class="f-group">
+              <label>Plazo deseado del proyecto</label>
+              <select id="eng_plazo">
+                <option value="">Selecciona un plazo</option>
+                <option value="Lo antes posible">Lo antes posible</option>
+                <option value="En 1 mes">En 1 mes</option>
+                <option value="En 2 – 3 meses">En 2 &ndash; 3 meses</option>
+                <option value="En más de 3 meses">En m&aacute;s de 3 meses</option>
+                <option value="Aún en planeación">A&uacute;n en planeaci&oacute;n</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-group">
+            <label>Fecha preferida para visita t&eacute;cnica</label>
+            <div class="date-row">
+              <div>
+                <input type="date" id="eng_fecha"/>
+                <p class="date-note">D&iacute;a preferido para el levantamiento</p>
+              </div>
+              <div>
+                <select id="eng_hora">
+                  <option value="">Horario preferido</option>
+                  <option value="8:00 – 10:00 AM">8:00 &ndash; 10:00 AM</option>
+                  <option value="10:00 AM – 12:00 PM">10:00 AM &ndash; 12:00 PM</option>
+                  <option value="1:00 – 3:00 PM">1:00 &ndash; 3:00 PM</option>
+                  <option value="3:00 – 5:00 PM">3:00 &ndash; 5:00 PM</option>
+                </select>
+                <p class="date-note">Bloque horario de preferencia</p>
+              </div>
+            </div>
+          </div>
+          <div class="f-group">
+            <label>Describe tu proyecto <span class="req">*</span></label>
+            <textarea id="eng_desc" placeholder="Cu&eacute;ntanos el tipo de instalaci&oacute;n, uso del espacio, si ya tienes equipos, qu&eacute; problema tienes actualmente o qu&eacute; quieres lograr..." required></textarea>
+          </div>
+          <button type="submit" class="f-submit">
+            <i class="fas fa-paper-plane"></i> Enviar solicitud de proyecto
+          </button>
+          <p class="f-note">O escr&iacute;benos directamente a <a href="mailto:ingenieria@fixyahn.com">ingenieria@fixyahn.com</a> &bull; Respondemos en menos de 24 h&aacute;biles.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-strip">
+  <h2>&iquest;Tu proyecto necesita ingenier&iacute;a?</h2>
+  <p>Cu&eacute;ntanos qu&eacute; tienes en mente. La consulta inicial es gratis y sin compromiso.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/50498481179?text=Hola%20FixYa,%20necesito%20cotizaci%C3%B3n%20para%20un%20proyecto%20de%20ingenier%C3%ADa" class="btn-dark" target="_blank"><i class="fab fa-whatsapp"></i> Consultar por WhatsApp</a>
+    <a href="mailto:ingenieria@fixyahn.com" class="btn-mail"><i class="fas fa-envelope"></i> ingenieria@fixyahn.com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo"><span class="fl-fix">Fix</span><span class="fl-ya">Ya</span></a>
+      <p>Servicios t&eacute;cnicos y proyectos de ingenier&iacute;a en Tegucigalpa. T&eacute;cnicos verificados, precios transparentes y calidad garantizada.</p>
+      <div class="social">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://wa.me/50498481179" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Ingenier&iacute;a</h4><ul>
+      <li><a href="#especialidades">A/C Industrial</a></li>
+      <li><a href="#especialidades">Cuartos Fr&iacute;os</a></li>
+      <li><a href="#especialidades">Llave en Mano</a></li>
+      <li><a href="#solicitar">Solicitar cotizaci&oacute;n</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Empresa</h4><ul>
+      <li><a href="nosotros.html">Qui&eacute;nes somos</a></li>
+      <li><a href="servicios.html">Servicios t&eacute;cnicos</a></li>
+      <li><a href="ingenieria.html">Proyectos de Ingenier&iacute;a</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Contacto</h4><ul>
+      <li><a href="https://wa.me/50498481179" target="_blank"><i class="fab fa-whatsapp"></i> +504 9848-1179</a></li>
+      <li><a href="mailto:ingenieria@fixyahn.com"><i class="fas fa-hard-hat"></i> Ingenier&iacute;a</a></li>
+      <li><a href="mailto:infofixya@fixyahn.com"><i class="fas fa-envelope"></i> Info general</a></li>
+      <li><a href="#">Tegucigalpa, Honduras</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 FixYa. Todos los derechos reservados.</span>
+    <span>Tegucigalpa, Honduras</span>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>10)});
+  var ham=document.getElementById('ham'),menu=document.getElementById('mobileMenu');
+  ham.addEventListener('click',function(){ham.classList.toggle('open');menu.classList.toggle('open')});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){ham.classList.remove('open');menu.classList.remove('open')})});
+  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!ham.contains(e.target)){ham.classList.remove('open');menu.classList.remove('open')}});
+  // Fecha mínima = mañana
+  var fi=document.getElementById('eng_fecha');
+  var t=new Date();t.setDate(t.getDate()+1);fi.min=t.toISOString().split('T')[0];
+  // Formulario → WhatsApp
+  document.getElementById('engForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var n=document.getElementById('eng_nombre').value,
+        em=document.getElementById('eng_empresa').value,
+        tel=document.getElementById('eng_tel').value,
+        mail=document.getElementById('eng_email').value,
+        tipo=document.getElementById('eng_tipo').value,
+        ubic=document.getElementById('eng_ubicacion').value,
+        tam=document.getElementById('eng_tamano').value,
+        pl=document.getElementById('eng_plazo').value,
+        fe=document.getElementById('eng_fecha').value,
+        ho=document.getElementById('eng_hora').value,
+        desc=document.getElementById('eng_desc').value;
+    var msg='🔧 *SOLICITUD DE PROYECTO — INGENIERÍA FIXYAHN*\n\n'
+      +'👤 *Nombre:* '+n+'\n'
+      +(em?'🏢 *Empresa:* '+em+'\n':'')
+      +'📞 *Teléfono:* '+tel+'\n'
+      +'✉️ *Correo:* '+mail+'\n\n'
+      +'🏗️ *Tipo de proyecto:* '+tipo+'\n'
+      +'📍 *Ubicación:* '+ubic+'\n'
+      +(tam?'📐 *Tamaño:* '+tam+'\n':'')
+      +(pl?'⏱️ *Plazo:* '+pl+'\n':'')
+      +(fe?'📅 *Visita técnica:* '+fe+(ho?' — '+ho:'')+'\n':'')
+      +'\n📋 *Descripción:*\n'+desc;
+    window.open('https://wa.me/50498481179?text='+encodeURIComponent(msg),'_blank');
+  });
+</script>
+</body>
+</html>
