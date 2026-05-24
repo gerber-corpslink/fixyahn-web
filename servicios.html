@@ -44,7 +44,7 @@
     }
     .nav-wa:hover{background:var(--green-d);transform:translateY(-1px)}
     /* Hamburger */
-    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:10px;background:none;border:none;min-width:44px;min-height:44px;justify-content:center;align-items:center}
     .hamburger span{display:block;width:24px;height:2.5px;background:var(--t1);border-radius:2px;transition:all .3s}
     .hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
     .hamburger.open span:nth-child(2){opacity:0}
@@ -456,12 +456,14 @@ window.addEventListener('scroll',function(){var nav=document.getElementById('nav
 
   // ── Hamburger ──
   (function(){
-    var b=document.getElementById('ham'),m=document.getElementById('mobileMenu');
-    if(!b||!m)return;
-    b.addEventListener('click',function(e){e.stopPropagation();m.classList.toggle('open');b.classList.toggle('open');});
-    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');b.classList.remove('open');});});
-    document.addEventListener('click',function(e){if(m.classList.contains('open')&&!m.contains(e.target)&&e.target!==b){m.classList.remove('open');b.classList.remove('open');}});
-    window.addEventListener('resize',function(){if(window.innerWidth>960){m.classList.remove('open');b.classList.remove('open');}});
+    var btn=document.getElementById('ham'),menu=document.getElementById('mobileMenu');
+    if(!btn||!menu)return;
+    function open_(){menu.classList.add('open');btn.classList.add('open');}
+    function close_(){menu.classList.remove('open');btn.classList.remove('open');}
+    btn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();menu.classList.contains('open')?close_():open_();});
+    menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close_);});
+    document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))close_();});
+    window.addEventListener('resize',function(){if(window.innerWidth>960)close_();});
   })();
 </script>
 </body>
