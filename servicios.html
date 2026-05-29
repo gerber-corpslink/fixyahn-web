@@ -129,17 +129,96 @@
     .footer-bottom{max-width:1200px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.8rem;color:rgba(255,255,255,.4)}
 
     /* RESPONSIVE */
+    /* ═══ TABLET ═══ */
     @media(max-width:960px){
       .cat-row{grid-template-columns:1fr;gap:2rem;margin-bottom:4rem}
       .cat-img{height:260px}
       .footer-inner{grid-template-columns:1fr 1fr}
+      .sec{padding:3.5rem 5%}
     }
-    @media(max-width:580px){
+
+    /* ═══ MOBILE ═══ */
+    @media(max-width:600px){
+      /* Hero */
+      .page-hero{padding:90px 4% 50px}
+      .page-hero h1{font-size:1.75rem;letter-spacing:-.5px}
+      .page-hero p{font-size:.93rem}
+      .hero-stats{gap:1.5rem;margin-top:2rem;padding-top:1.5rem}
+      .hs strong{font-size:1.7rem}
+
+      /* Secciones */
+      .sec{padding:2.5rem 4%}
+      .elec-header{padding:2.5rem 4%}
+      .sec-title{font-size:1.55rem}
+      .sec-sub{font-size:.9rem}
+
+      /* Tarjetas de servicios */
+      .cat-row{gap:1.5rem;margin-bottom:3rem}
+      .cat-img{height:220px;border-radius:12px}
       .cat-cards{grid-template-columns:1fr}
-      .hero-stats{gap:2rem}
+      .cat-info h2{font-size:1.3rem}
+      .cat-info p{font-size:.9rem}
+      .mini-card{padding:1rem}
+      .mini-card strong{font-size:.85rem}
+
+      /* Botón WhatsApp full-width */
+      .cat-wa{
+        display:flex;width:100%;justify-content:center;
+        margin-top:1.2rem;padding:1rem;
+        font-size:.95rem;border-radius:12px;
+      }
+
+      /* Hero stats */
+      .hero-stats{flex-wrap:wrap;gap:1rem}
+      .hs{min-width:40%}
+
+      /* Footer */
       .footer-inner{grid-template-columns:1fr}
-      /* Botones full-width en mobile */
-      .cat-wa{width:100%;margin-top:1.2rem;padding:.95rem 1.5rem;font-size:1rem;border-radius:14px}
+    }
+  
+    /* ═══ MOBILE UNIVERSAL FIX ═══ */
+    @media(max-width:600px){
+      /* Secciones — padding controlado */
+      .sec, .sec-alt { padding: 2.5rem 4% !important; }
+      .page-hero { padding: 90px 4% 50px !important; }
+      .page-hero h1 { font-size: clamp(1.6rem,7vw,2.2rem) !important; letter-spacing:-.5px; }
+      .page-hero p { font-size: .92rem !important; }
+      .hero-stats { gap: 1.2rem; flex-wrap: wrap; }
+      .hs strong { font-size: 1.6rem; }
+      .hs span { font-size: .75rem; }
+
+      /* Textos — no se desborden */
+      .sec-title { font-size: clamp(1.4rem,6vw,1.8rem) !important; }
+      .sec-sub { font-size: .88rem; max-width: 100% !important; }
+      h2 { word-break: break-word; }
+      p { word-break: break-word; }
+
+      /* Grids — una columna en móvil */
+      .cat-row { grid-template-columns: 1fr !important; gap: 1.5rem; }
+      .cat-img { height: 210px !important; }
+      .cat-cards { grid-template-columns: 1fr !important; }
+      .eng-grid { grid-template-columns: 1fr !important; }
+      .why-grid { grid-template-columns: 1fr !important; }
+      .values-grid { grid-template-columns: 1fr !important; }
+      .proc-grid { grid-template-columns: 1fr !important; }
+      .scope-grid { grid-template-columns: repeat(2,1fr) !important; }
+      .hero-stats { gap: 1.5rem; }
+
+      /* Botones */
+      .cat-wa { width:100%; justify-content:center; border-radius:12px; padding:.95rem 1rem !important; }
+      .cta-btns, .hero-btns { flex-direction: column; align-items: stretch; }
+      .btn-dark, .btn-green, .btn-gold-hero, .btn-outline-hero { text-align:center; justify-content:center; }
+
+      /* Footer */
+      .footer-grid, .footer-inner { grid-template-columns: 1fr !important; gap: 2rem !important; }
+
+      /* Ingeniería — sección proyectos dos columnas a una */
+      [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+
+      /* Overflow prevention */
+      * { max-width: 100%; }
+      img { max-width: 100%; height: auto; }
+      table { display: block; overflow-x: auto; }
     }
   </style>
 </head>
@@ -309,7 +388,7 @@
 
 <!-- ═══ INSTALACIONES ELÉCTRICAS ═══ -->
 <div class="elec-header">
-  <div class="container">
+  <div class="container" style="padding:0">
     <span class="sec-label" style="background:rgba(245,158,11,.2);color:#F59E0B"><i class="fas fa-bolt"></i> Nuevo servicio</span>
     <h2 style="font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:900;color:#fff;letter-spacing:-.5px;margin-bottom:.8rem">Instalaciones Eléctricas</h2>
     <p style="color:rgba(255,255,255,.65);font-size:1rem;line-height:1.75;max-width:680px">Técnicos especializados en instalaciones eléctricas residenciales, comerciales e industriales. Trabajos certificados, seguros y con garantía en toda Tegucigalpa.</p>
@@ -407,14 +486,14 @@
 </section>
 
 <!-- INGENIERÍA -->
-<section style="background:linear-gradient(135deg,#050E1F,#0D2444);padding:5.5rem 5%">
+<section style="background:linear-gradient(135deg,#050E1F,#0D2444);padding:clamp(2.5rem,5vw,5.5rem) clamp(4%,5%,5%)">
   <div style="max-width:1200px;margin:0 auto">
     <span style="display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.12);color:rgba(255,255,255,.9);padding:.35rem .9rem;border-radius:50px;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem"><i class="fas fa-hard-hat"></i> Ingenier&iacute;a FixYa</span>
     <h2 style="font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:900;color:#fff;letter-spacing:-.5px;margin-bottom:.8rem">Proyectos grandes.<br/>Refrigeración y Electricidad.</h2>
     <p style="color:rgba(255,255,255,.65);font-size:1rem;line-height:1.75;max-width:680px;margin-bottom:3rem">Cuando el proyecto requiere ingeniería, diseño formal y ejecución a gran escala, entra el Departamento de Ingeniería FixYa. Cubrimos ambas áreas: sistemas de frío industriales e instalaciones eléctricas de alta complejidad.</p>
 
     <!-- DOS COLUMNAS: REFRIGERACIÓN + ELECTRICIDAD -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:3rem">
 
       <!-- COLUMNA REFRIGERACIÓN -->
       <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:2rem">
@@ -445,7 +524,7 @@
       </div>
     </div>
 
-    <div style="text-align:center;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+    <div style="text-align:center;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;padding:0 4%">
       <a href="ingenieria.html" style="display:inline-flex;align-items:center;gap:.6rem;background:#F5A623;color:#0F172A;padding:1rem 2.5rem;border-radius:50px;font-weight:800;font-size:1rem;text-decoration:none">
         <i class="fas fa-hard-hat"></i> Ver Departamento de Ingenier&iacute;a
       </a>
