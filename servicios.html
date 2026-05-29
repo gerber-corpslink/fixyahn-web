@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Servicios — FixYa Honduras</title>
-  <meta name="description" content="FixYa cubre todas las ramas del frío en Honduras: A/C residencial y comercial, refrigeración doméstica y comercial, cuartos fríos e industrial."/>
+  <meta name="description" content="FixYa cubre A/C residencial y comercial, refrigeración, cuartos fríos e instalaciones eléctricas en Tegucigalpa, Honduras."/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
@@ -15,20 +15,15 @@
       --white:#fff;--off:#F8FAFC;--gray:#E2E8F0;
       --t1:#0F172A;--t2:#334155;--t3:#64748B;
       --green:#25D366;--green-d:#1ebe5d;
+      --elec:#F59E0B;--elec-d:#D97706;
       --r:12px;--r-lg:20px;
       --sh:0 4px 20px rgba(0,0,0,.08);--sh-lg:0 16px 48px rgba(0,0,0,.14);
     }
     html{scroll-behavior:smooth}
     body{font-family:'Inter',sans-serif;color:var(--t1);background:var(--white);overflow-x:hidden}
 
-    /* ═══ NAV ═══ */
-    nav{
-      position:fixed;top:0;left:0;right:0;z-index:200;
-      background:rgba(255,255,255,.97);backdrop-filter:blur(16px);
-      border-bottom:1px solid var(--gray);
-      height:68px;display:flex;align-items:center;justify-content:space-between;
-      padding:0 5%;transition:box-shadow .3s;
-    }
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--gray);height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;transition:box-shadow .3s}
     nav.scrolled{box-shadow:var(--sh)}
     .nav-logo{text-decoration:none;display:flex;align-items:center}
     .logo-fix{font-size:1.7rem;font-weight:900;color:var(--t1);letter-spacing:-1.5px}
@@ -37,132 +32,91 @@
     .nav-center a{text-decoration:none;color:var(--t2);font-weight:500;font-size:.93rem;transition:color .2s}
     .nav-center a:hover,.nav-center a.active{color:var(--blue)}
     .nav-right{display:flex;align-items:center;gap:.8rem}
-    .nav-wa{
-      display:flex;align-items:center;gap:.5rem;background:var(--green);color:#fff;
-      padding:.55rem 1.2rem;border-radius:50px;font-weight:700;font-size:.88rem;
-      text-decoration:none;transition:all .2s;white-space:nowrap;
-    }
+    .nav-wa{display:flex;align-items:center;gap:.5rem;background:var(--green);color:#fff;padding:.55rem 1.2rem;border-radius:50px;font-weight:700;font-size:.88rem;text-decoration:none;transition:all .2s;white-space:nowrap}
     .nav-wa:hover{background:var(--green-d);transform:translateY(-1px)}
-    /* Hamburger */
     .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:10px;background:none;border:none;min-width:44px;min-height:44px;justify-content:center;align-items:center}
     .hamburger span{display:block;width:24px;height:2.5px;background:var(--t1);border-radius:2px;transition:all .3s}
-    
-    
-    
     .mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;z-index:250;background:#fff;border-bottom:2px solid var(--gray);padding:1.5rem 5%;flex-direction:column;gap:1rem;box-shadow:0 8px 32px rgba(0,0,0,.1)}
-    
     .mobile-menu a{text-decoration:none;color:var(--t1);font-weight:600;font-size:1.05rem;padding:.5rem 0;border-bottom:1px solid var(--gray)}
     .mobile-menu a:last-child{border:none}
     .mobile-wa{display:flex;align-items:center;justify-content:center;gap:.6rem;background:var(--green);color:#fff;padding:.9rem;border-radius:12px;font-weight:700;font-size:1rem;text-decoration:none;margin-top:.5rem}
     @media(max-width:960px){.nav-center{display:none}.hamburger{display:flex}.nav-wa{display:none}}
+    #nav-toggle{display:none}
+    #nav-toggle:checked ~ .mobile-menu{display:flex}
+    #nav-toggle:checked ~ nav .hamburger span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+    #nav-toggle:checked ~ nav .hamburger span:nth-child(2){opacity:0}
+    #nav-toggle:checked ~ nav .hamburger span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
 
-    /* ═══ FLOATING WA ═══ */
-    .wa-float{
-      position:fixed;bottom:28px;right:24px;z-index:300;
-      display:flex;align-items:center;gap:.6rem;
-      background:var(--green);color:#fff;
-      padding:.85rem 1.4rem;border-radius:50px;
-      font-weight:700;font-size:1rem;text-decoration:none;
-      box-shadow:0 8px 28px rgba(37,211,102,.5);
-      transition:all .25s;animation:pulse-wa 2.5s infinite;
-    }
+    /* FLOATING BUTTONS */
+    .wa-float{position:fixed;bottom:28px;right:24px;z-index:300;display:flex;align-items:center;gap:.6rem;background:var(--green);color:#fff;padding:.85rem 1.4rem;border-radius:50px;font-weight:700;font-size:1rem;text-decoration:none;box-shadow:0 8px 28px rgba(37,211,102,.5);transition:all .25s;animation:pulse-wa 2.5s infinite}
     .wa-float:hover{background:var(--green-d);transform:translateY(-3px) scale(1.04);animation:none}
     .wa-float i{font-size:1.3rem}
     @keyframes pulse-wa{0%,100%{box-shadow:0 8px 28px rgba(37,211,102,.5)}50%{box-shadow:0 8px 36px rgba(37,211,102,.75),0 0 0 8px rgba(37,211,102,.15)}}
     @media(max-width:600px){.wa-float{padding:.8rem 1rem;bottom:20px;right:16px}.wa-float .wa-label{display:none}}
+    .wa-tech-float{position:fixed;bottom:100px;right:24px;z-index:300;display:flex;align-items:center;gap:.5rem;background:#F5A623;color:#0F172A;padding:.7rem 1.2rem;border-radius:50px;font-weight:700;font-size:.82rem;text-decoration:none;box-shadow:0 6px 20px rgba(245,166,35,.45);transition:all .25s;white-space:nowrap}
+    .wa-tech-float:hover{background:#D4891A;transform:translateY(-3px) scale(1.04)}
+    .wa-tech-float i{font-size:1rem}
+    @media(max-width:600px){.wa-tech-float{padding:.65rem .9rem;bottom:88px;right:16px}}
 
-    /* ═══ PAGE HERO ═══ */
-    .page-hero{
-      padding:120px 5% 80px;
-      background:linear-gradient(135deg,#0D1B2E 0%,#1A3660 50%,#1A56DB 100%);
-      position:relative;overflow:hidden;text-align:center;
-    }
-    .page-hero::before{display:none}
+    /* HERO */
+    .page-hero{padding:120px 5% 80px;background:linear-gradient(135deg,#0D1B2E 0%,#1A3660 50%,#1A56DB 100%);text-align:center}
     .page-hero>*{position:relative;z-index:1}
-    .ph-badge{
-      display:inline-flex;align-items:center;gap:.5rem;
-      background:rgba(245,166,35,.2);border:1px solid rgba(245,166,35,.4);
-      color:var(--gold);padding:.4rem 1rem;border-radius:50px;
-      font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.5rem;
-    }
+    .ph-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(245,166,35,.2);border:1px solid rgba(245,166,35,.4);color:var(--gold);padding:.4rem 1rem;border-radius:50px;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.5rem}
     .page-hero h1{font-size:clamp(2rem,4.5vw,3.4rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1rem;letter-spacing:-1px}
     .page-hero p{font-size:1.1rem;color:rgba(255,255,255,.78);max-width:680px;margin:0 auto;line-height:1.7}
     .hero-stats{display:flex;justify-content:center;gap:4rem;margin-top:3rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.15);flex-wrap:wrap}
     .hs strong{display:block;font-size:2.2rem;font-weight:900;color:var(--gold);line-height:1}
     .hs span{font-size:.82rem;color:rgba(255,255,255,.65);margin-top:.3rem;display:block}
 
-    /* ═══ SHARED ═══ */
+    /* SHARED */
     .container{max-width:1200px;margin:0 auto}
     .sec{padding:5rem 5%}
     .sec-alt{background:var(--off)}
     .sec-label{display:inline-flex;align-items:center;gap:.4rem;background:var(--blue-l);color:var(--blue);padding:.35rem .9rem;border-radius:50px;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem}
+    .sec-label-elec{background:#FEF3C7;color:#92400E}
     .sec-title{font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:900;line-height:1.15;color:var(--t1);letter-spacing:-.5px}
     .sec-sub{color:var(--t3);font-size:1rem;line-height:1.75;margin-top:.8rem;max-width:680px}
 
-    /* ═══ CATEGORY ROW ═══ */
-    .cat-row{
-      display:grid;grid-template-columns:1fr 1fr;gap:4rem;
-      align-items:center;margin-bottom:6rem;
-    }
+    /* CATEGORY ROW */
+    .cat-row{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:6rem}
     .cat-row:last-child{margin-bottom:0}
-    .cat-img{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg);position:relative;height:340px;display:flex;align-items:center;justify-content:center}
-    .cat-bg-icon{font-size:9rem;color:rgba(255,255,255,.13);position:absolute}
-    .gr-ac{background:linear-gradient(135deg,#0D1B2E,#1A56DB)}
-    .gr-ac-com{background:linear-gradient(135deg,#0F2044,#2563EB)}
-    .gr-refrig{background:linear-gradient(135deg,#064E3B,#059669)}
-    .gr-refrig-com{background:linear-gradient(135deg,#134E4A,#0F766E)}
-    .gr-cold{background:linear-gradient(135deg,#0C2340,#0369A1)}
-    .gr-truck{background:linear-gradient(135deg,#1C1917,#57534E)}
-    .cat-tag{
-      display:inline-flex;align-items:center;gap:.5rem;
-      padding:.35rem .9rem;border-radius:50px;font-size:.75rem;font-weight:700;text-transform:uppercase;margin-bottom:1rem;
-    }
+    .cat-img{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg);height:360px}
+    .cat-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+    .cat-img:hover img{transform:scale(1.04)}
+    .cat-tag{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .9rem;border-radius:50px;font-size:.75rem;font-weight:700;text-transform:uppercase;margin-bottom:1rem}
     .tag-on{background:#DCFCE7;color:#15803D}
-    .tag-soon{background:var(--gray);color:var(--t3)}
+    .tag-elec{background:#FEF3C7;color:#92400E}
     .cat-info h2{font-size:clamp(1.5rem,2.5vw,2rem);font-weight:800;margin-bottom:.8rem;color:var(--t1)}
     .cat-info p{color:var(--t3);font-size:.97rem;line-height:1.8}
     .cat-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.8rem}
     .mini-card{background:var(--white);border:1.5px solid var(--gray);border-radius:var(--r);padding:1.2rem;transition:all .2s}
     .sec-alt .mini-card{background:var(--white)}
     .mini-card:hover{border-color:var(--blue);box-shadow:var(--sh)}
+    .mini-card-elec:hover{border-color:var(--elec);box-shadow:var(--sh)}
     .mini-card i{color:var(--blue);font-size:1.1rem;margin-bottom:.6rem;display:block}
+    .mini-card-elec i{color:var(--elec)}
     .mini-card strong{display:block;font-size:.88rem;font-weight:700;margin-bottom:.3rem;color:var(--t1)}
     .mini-card span{font-size:.8rem;color:var(--t3);line-height:1.5}
+
+    /* CTA BUTTONS — corrección mobile */
     .cat-wa{
-      display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;
-      background:var(--green);color:#fff;padding:.8rem 1.8rem;
-      border-radius:50px;font-weight:700;font-size:.93rem;text-decoration:none;transition:all .2s;
+      display:inline-flex;align-items:center;justify-content:center;gap:.5rem;margin-top:1.5rem;
+      background:var(--green);color:#fff;padding:.85rem 2rem;
+      border-radius:50px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .2s;
     }
     .cat-wa:hover{background:var(--green-d);transform:translateY(-2px);box-shadow:0 8px 20px rgba(37,211,102,.35)}
+    .cat-wa-elec{background:var(--elec)}
+    .cat-wa-elec:hover{background:var(--elec-d);box-shadow:0 8px 20px rgba(245,158,11,.35)}
 
-    /* ═══ SCOPE BANNER ═══ */
-    .scope{background:linear-gradient(135deg,#0D1B2E,#1A3660);padding:5rem 5%;text-align:center}
-    .scope .sec-label{background:rgba(255,255,255,.12);color:#fff}
-    .scope h2{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;color:#fff;margin-bottom:.8rem;letter-spacing:-.5px}
-    .scope p{color:rgba(255,255,255,.65);font-size:1rem;line-height:1.75;max-width:680px;margin:0 auto}
-    .scope-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;margin-top:3rem}
-    .scope-item{
-      text-align:center;padding:1.5rem .8rem;
-      background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
-      border-radius:var(--r);transition:all .25s;
-    }
-    .scope-item:hover{background:rgba(255,255,255,.14);border-color:var(--gold)}
-    .scope-item i{font-size:1.8rem;color:var(--gold);display:block;margin-bottom:.7rem}
-    .scope-item span{font-size:.78rem;color:rgba(255,255,255,.8);font-weight:500;line-height:1.4;display:block}
+    /* ELECTRICAL SECTION HEADER */
+    .elec-header{background:linear-gradient(135deg,#1C1C1C,#2D2D2D);padding:5rem 5%}
+    .elec-header .sec-label{background:rgba(245,158,11,.2);color:var(--elec)}
+    .elec-header h2{font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:900;color:#fff;letter-spacing:-.5px;margin-bottom:.8rem}
+    .elec-header p{color:rgba(255,255,255,.65);font-size:1rem;line-height:1.75;max-width:680px}
 
-    /* ═══ CTA STRIP ═══ */
-    .cta-strip{background:linear-gradient(135deg,var(--gold),#E8920F);padding:5rem 5%;text-align:center}
-    .cta-strip h2{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;color:var(--t1);margin-bottom:.7rem;letter-spacing:-.5px}
-    .cta-strip p{color:rgba(15,23,42,.7);font-size:1.05rem;margin-bottom:2.5rem}
-    .cta-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
-    .btn-dark{display:inline-flex;align-items:center;gap:.6rem;background:var(--t1);color:#fff;padding:1rem 2.2rem;border-radius:50px;font-weight:800;font-size:1rem;text-decoration:none;transition:all .2s}
-    .btn-dark:hover{background:#1E293B;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
-    .btn-green{display:inline-flex;align-items:center;gap:.6rem;background:var(--green);color:#fff;padding:1rem 2.2rem;border-radius:50px;font-weight:800;font-size:1rem;text-decoration:none;transition:all .2s;box-shadow:0 8px 24px rgba(37,211,102,.35)}
-    .btn-green:hover{background:var(--green-d);transform:translateY(-2px)}
-
-    /* ═══ FOOTER ═══ */
-    footer{background:var(--t1);padding:4rem 5% 2rem}
-    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1200px;margin:0 auto}
+    /* FOOTER */
+    footer{background:#0F172A;padding:4rem 5% 2rem}
+    .footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1200px;margin:0 auto}
     .footer-brand p{font-size:.88rem;color:rgba(255,255,255,.55);margin-top:.8rem;line-height:1.7;max-width:260px}
     .social{display:flex;gap:.7rem;margin-top:1.2rem}
     .social a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:.9rem;transition:background .2s}
@@ -172,43 +126,25 @@
     .footer-col ul li{margin-bottom:.55rem}
     .footer-col ul li a{color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem;transition:color .2s}
     .footer-col ul li a:hover{color:var(--gold)}
-    .footer-bottom{max-width:1200px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.8rem;color:rgba(255,255,255,.4)}
-    .footer-logo{text-decoration:none;display:inline-flex;margin-bottom:.6rem}
-    .fl-fix{font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-1px}
-    .fl-ya{font-size:1.5rem;font-weight:900;color:var(--gold);letter-spacing:-1px}
+    .footer-bottom{max-width:1200px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.8rem;color:rgba(255,255,255,.4)}
 
-    /* ═══ RESPONSIVE ═══ */
+    /* RESPONSIVE */
     @media(max-width:960px){
       .cat-row{grid-template-columns:1fr;gap:2rem;margin-bottom:4rem}
-      .cat-img img{height:260px}
-      .scope-grid{grid-template-columns:repeat(3,1fr)}
-      .footer-grid{grid-template-columns:1fr 1fr}
+      .cat-img{height:260px}
+      .footer-inner{grid-template-columns:1fr 1fr}
     }
     @media(max-width:580px){
       .cat-cards{grid-template-columns:1fr}
-      .scope-grid{grid-template-columns:repeat(2,1fr)}
       .hero-stats{gap:2rem}
-      .footer-grid{grid-template-columns:1fr}
-      .cta-btns{flex-direction:column;align-items:center}
+      .footer-inner{grid-template-columns:1fr}
+      /* Botones full-width en mobile */
+      .cat-wa{width:100%;margin-top:1.2rem;padding:.95rem 1.5rem;font-size:1rem;border-radius:14px}
     }
-      .gr-teal{background:linear-gradient(135deg,#064E3B 0%,#0D9488 100%)}
-    .gr-teal2{background:linear-gradient(135deg,#134E4A 0%,#0F766E 100%)}
-
-    .wa-tech-float{position:fixed;bottom:100px;right:24px;z-index:300;display:flex;align-items:center;gap:.5rem;background:#F5A623;color:#0F172A;padding:.7rem 1.2rem;border-radius:50px;font-weight:700;font-size:.82rem;text-decoration:none;box-shadow:0 6px 20px rgba(245,166,35,.45);transition:all .25s;white-space:nowrap}
-    .wa-tech-float:hover{background:#D4891A;transform:translateY(-3px) scale(1.04);box-shadow:0 10px 28px rgba(245,166,35,.6)}
-    .wa-tech-float i{font-size:1rem}
-    @media(max-width:600px){.wa-tech-float{padding:.65rem .9rem;bottom:88px;right:16px}}
-
-    #nav-toggle{display:none}
-    #nav-toggle:checked ~ .mobile-menu{display:flex}
-    #nav-toggle:checked ~ nav .hamburger span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
-    #nav-toggle:checked ~ nav .hamburger span:nth-child(2){opacity:0}
-    #nav-toggle:checked ~ nav .hamburger span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
-    </style>
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
 <input type="checkbox" id="nav-toggle">
 <nav id="navbar">
   <a href="index.html" class="nav-logo"><span class="logo-fix">Fix</span><span class="logo-ya">Ya</span></a>
@@ -220,70 +156,66 @@
     <li><a href="contacto.html">Contacto</a></li>
   </ul>
   <div class="nav-right">
-    <a href="https://wa.me/50498481179?text=Hola%20FixYa,%20necesito%20información%20sobre%20servicios" class="nav-wa" target="_blank">
+    <a href="https://wa.me/50498481179?text=Hola%20FixYa%2C%20necesito%20información%20sobre%20sus%20servicios" class="nav-wa" target="_blank">
       <i class="fab fa-whatsapp"></i> Solicitar servicio
     </a>
     <label for="nav-toggle" class="hamburger"><span></span><span></span><span></span></label>
   </div>
 </nav>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html" >Inicio</a>
-  <a href="servicios.html" >Servicios</a>
-  <a href="ingenieria.html" >Ingenier&iacute;a</a>
-  <a href="nosotros.html" >Nosotros</a>
-  <a href="contacto.html" >Contacto</a>
-  <a href="https://wa.me/50498481179?text=Hola%20FixYa" class="mobile-wa" target="_blank">
+<div class="mobile-menu">
+  <a href="index.html">Inicio</a>
+  <a href="servicios.html">Servicios</a>
+  <a href="ingenieria.html">Ingenier&iacute;a</a>
+  <a href="nosotros.html">Nosotros</a>
+  <a href="contacto.html">Contacto</a>
+  <a href="https://wa.me/50498481179?text=Hola%20FixYa%2C%20quiero%20solicitar%20un%20servicio" class="mobile-wa" target="_blank">
     <i class="fab fa-whatsapp"></i> Solicitar por WhatsApp
   </a>
 </div>
 
-<!-- FLOATING WHATSAPP -->
 <a href="https://wa.me/50498481179?text=Hola%20FixYa%2C%20quiero%20unirme%20como%20t%C3%A9cnico%20verificado" class="wa-tech-float" target="_blank"><i class="fas fa-hard-hat"></i><span class="tech-label">&iquest;Eres t&eacute;cnico? &Uacute;nete</span></a>
-<a href="https://wa.me/50498481179?text=Hola%20FixYa,%20quiero%20solicitar%20un%20servicio%20técnico" class="wa-float" target="_blank">
+<a href="https://wa.me/50498481179?text=Hola%20FixYa%2C%20quiero%20solicitar%20un%20servicio%20t%C3%A9cnico" class="wa-float" target="_blank">
   <i class="fab fa-whatsapp"></i>
   <span class="wa-label">Solicitar ahora</span>
 </a>
 
-<!-- PAGE HERO -->
+<!-- HERO -->
 <div class="page-hero">
-  <div class="ph-badge"><i class="fas fa-snowflake"></i> Especialistas en frío</div>
-  <h1>Todas las ramas del frío.<br/>Un solo lugar.</h1>
-  <p>FixYa cubre el espectro completo de climatización, refrigeración y sistemas de frío — desde tu hogar hasta grandes instalaciones comerciales e industriales en Honduras.</p>
+  <div class="ph-badge"><i class="fas fa-bolt"></i> A/C · Refrigeración · Electricidad</div>
+  <h1>Especialistas técnicos.<br/>Un solo lugar.</h1>
+  <p>FixYa cubre climatización, refrigeración e instalaciones eléctricas con técnicos verificados en Tegucigalpa. Desde tu hogar hasta grandes proyectos industriales.</p>
   <div class="hero-stats">
-    <div class="hs"><strong>6+</strong><span>Ramas especializadas</span></div>
+    <div class="hs"><strong>7+</strong><span>Especialidades</span></div>
     <div class="hs"><strong>+25</strong><span>Técnicos verificados</span></div>
-    <div class="hs"><strong>24/7</strong><span>Disponibilidad</span></div>
+    <div class="hs"><strong>L.300</strong><span>Costo de visita</span></div>
     <div class="hs"><strong>Teg.</strong><span>Tegucigalpa, HN</span></div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════ -->
-<!--          SERVICIOS DISPONIBLES         -->
-<!-- ═══════════════════════════════════════ -->
+<!-- ═══ A/C Y REFRIGERACIÓN ═══ -->
 <section class="sec">
   <div class="container">
-    <span class="sec-label"><i class="fas fa-check-circle"></i> Disponible ahora</span>
-    <h2 class="sec-title">Servicios activos en Tegucigalpa</h2>
-    <p class="sec-sub">Nuestros técnicos verificados cubren estas especialidades hoy mismo. Agenda en minutos por WhatsApp.</p>
+    <span class="sec-label"><i class="fas fa-snowflake"></i> Climatización & Refrigeración</span>
+    <h2 class="sec-title">Servicios de frío disponibles ahora</h2>
+    <p class="sec-sub">Técnicos verificados en Tegucigalpa. Agenda hoy por WhatsApp y recibe tu visita con garantía de trabajo.</p>
 
     <!-- A/C RESIDENCIAL -->
     <div class="cat-row" id="ac-residencial" style="margin-top:3.5rem">
-      <div class="cat-img gr-ac">
-        <i class="fas fa-wind cat-bg-icon"></i>
+      <div class="cat-img">
+        <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&q=80&fit=crop" alt="Aire acondicionado residencial instalación" loading="lazy"/>
       </div>
       <div class="cat-info">
         <span class="cat-tag tag-on"><i class="fas fa-check-circle"></i> Disponible ahora</span>
         <h2>Aire Acondicionado Residencial</h2>
-        <p>Instalación, mantenimiento preventivo y reparación de todos los sistemas de A/C para viviendas. Trabajamos con todas las marcas del mercado hondureño con garantía de trabajo.</p>
+        <p>Instalación, mantenimiento preventivo y reparación de todos los sistemas de A/C para viviendas. Trabajamos con todas las marcas con garantía de trabajo.</p>
         <div class="cat-cards">
           <div class="mini-card"><i class="fas fa-wind"></i><strong>Instalación de minisplits</strong><span>Trazado, canalización, carga de gas R-410A / R-32</span></div>
           <div class="mini-card"><i class="fas fa-wrench"></i><strong>Mantenimiento preventivo</strong><span>Limpieza profunda de filtros, serpentines y bobinas</span></div>
           <div class="mini-card"><i class="fas fa-tools"></i><strong>Diagnóstico y reparación</strong><span>Fallas eléctricas, fugas de gas, compresores, motores</span></div>
-          <div class="mini-card"><i class="fas fa-thermometer-half"></i><strong>Recarga de gas</strong><span>Verificación de presiones y recarga con gas certificado</span></div>
+          <div class="mini-card"><i class="fas fa-thermometer-half"></i><strong>Recarga de gas</strong><span>Verificación de presiones y recarga certificada</span></div>
         </div>
-        <a href="https://wa.me/50498481179?text=Hola%20FixYa,%20necesito%20servicio%20de%20A/C%20residencial" class="cat-wa" target="_blank">
+        <a href="https://wa.me/50498481179?text=Hola%20FixYa%2C%20necesito%20servicio%20de%20A%2FC%20residencial" class="cat-wa" target="_blank">
           <i class="fab fa-whatsapp"></i> Solicitar este servicio
         </a>
       </div>
@@ -294,38 +226,38 @@
       <div class="cat-info">
         <span class="cat-tag tag-on"><i class="fas fa-check-circle"></i> Disponible ahora</span>
         <h2>Aire Acondicionado Comercial</h2>
-        <p>Soluciones de climatización para oficinas, locales comerciales, hoteles, clínicas y centros de datos. Especialistas en sistemas de alta capacidad y eficiencia energética.</p>
+        <p>Climatización para oficinas, locales, hoteles, clínicas y centros de datos. Especialistas en sistemas de alta capacidad y eficiencia energética.</p>
         <div class="cat-cards">
           <div class="mini-card"><i class="fas fa-building"></i><strong>Sistemas VRF / VRV</strong><span>Instalación y mantenimiento de sistemas multi-zona</span></div>
           <div class="mini-card"><i class="fas fa-th-large"></i><strong>Unidades cassette</strong><span>Instalación en techos de oficinas y locales</span></div>
           <div class="mini-card"><i class="fas fa-industry"></i><strong>A/C central</strong><span>Manejadoras de aire y sistemas de ductos</span></div>
           <div class="mini-card"><i class="fas fa-cog"></i><strong>Mantenimiento programado</strong><span>Contratos de mantenimiento preventivo mensual</span></div>
         </div>
-        <a href="https://wa.me/50498481179?text=Hola%20FixYa,%20necesito%20A/C%20comercial" class="cat-wa" target="_blank">
+        <a href="https://wa.me/50498481179?text=Hola%20FixYa%2C%20necesito%20A%2FC%20comercial" class="cat-wa" target="_blank">
           <i class="fab fa-whatsapp"></i> Solicitar este servicio
         </a>
       </div>
-      <div class="cat-img gr-ac-com">
-        <i class="fas fa-building cat-bg-icon"></i>
+      <div class="cat-img">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&fit=crop" alt="Aire acondicionado comercial oficinas" loading="lazy"/>
       </div>
     </div>
 
     <!-- REFRIGERACIÓN DOMÉSTICA -->
     <div class="cat-row" id="refrig-domestica">
-      <div class="cat-img gr-refrig">
-        <i class="fas fa-snowflake cat-bg-icon"></i>
+      <div class="cat-img">
+        <img src="https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=800&q=80&fit=crop" alt="Reparación de refrigeradora doméstica" loading="lazy"/>
       </div>
       <div class="cat-info">
         <span class="cat-tag tag-on"><i class="fas fa-check-circle"></i> Disponible ahora</span>
         <h2>Refrigeración Doméstica</h2>
-                <p>Reparaci&oacute;n y mantenimiento de refrigeradoras, congeladores y m&aacute;quinas de hielo dom&eacute;sticas. Diagn&oacute;stico preciso, reparaci&oacute;n de fugas y carga de gas para todas las marcas del mercado.</p>
+        <p>Reparación y mantenimiento de refrigeradoras, congeladores y máquinas de hielo domésticas. Diagnóstico preciso y reparación de fugas para todas las marcas.</p>
         <div class="cat-cards">
-          <div class="mini-card"><i class="fas fa-plug"></i><strong>Diagn&oacute;stico el&eacute;ctrico</strong><span>Revisi&oacute;n de termostatos, motor y sistemas de control</span></div>
-          <div class="mini-card"><i class="fas fa-wind"></i><strong>Reparaci&oacute;n de fugas</strong><span>Localizaci&oacute;n y sellado de fugas en circuito frigor&iacute;fico</span></div>
+          <div class="mini-card"><i class="fas fa-plug"></i><strong>Diagnóstico eléctrico</strong><span>Revisión de termostatos, motor y sistemas de control</span></div>
+          <div class="mini-card"><i class="fas fa-wind"></i><strong>Reparación de fugas</strong><span>Localización y sellado de fugas en circuito frigorífico</span></div>
           <div class="mini-card"><i class="fas fa-snowflake"></i><strong>Carga de gas</strong><span>R-134a, R-600a y otros refrigerantes certificados</span></div>
-          <div class="mini-card"><i class="fas fa-wrench"></i><strong>Reparaci&oacute;n de compresor</strong><span>Cambio o reparaci&oacute;n de compresores herm&eacute;ticos</span></div>
+          <div class="mini-card"><i class="fas fa-wrench"></i><strong>Reparación de compresor</strong><span>Cambio o reparación de compresores herméticos</span></div>
         </div>
-        <a href="https://wa.me/50498481179?text=Hola%20FixYa,%20necesito%20reparaci%C3%B3n%20de%20refrigeradora" class="cat-wa" target="_blank">
+        <a href="https://wa.me/50498481179?text=Hola%20FixYa%2C%20necesito%20reparaci%C3%B3n%20de%20refrigeradora" class="cat-wa" target="_blank">
           <i class="fab fa-whatsapp"></i> Solicitar este servicio
         </a>
       </div>
@@ -335,128 +267,248 @@
     <div class="cat-row" id="refrig-comercial">
       <div class="cat-info">
         <span class="cat-tag tag-on"><i class="fas fa-check-circle"></i> Disponible ahora</span>
-        <h2>Refrigeraci&oacute;n Comercial</h2>
-        <p>Servicio especializado para equipos de refrigeraci&oacute;n comercial: vitrinas, c&aacute;maras exhibidoras, congeladores de supermercado y sistemas de conservaci&oacute;n para negocios de alimentos y farmacia.</p>
+        <h2>Refrigeración Comercial</h2>
+        <p>Servicio especializado para vitrinas, cámaras exhibidoras, congeladores de supermercado y sistemas de conservación para negocios de alimentos y farmacia.</p>
         <div class="cat-cards">
-          <div class="mini-card"><i class="fas fa-store"></i><strong>Vitrinas exhibidoras</strong><span>Reparaci&oacute;n y mantenimiento de vitrinas de supermercados y tiendas</span></div>
-          <div class="mini-card"><i class="fas fa-cubes"></i><strong>Congeladores comerciales</strong><span>Diagn&oacute;stico y reparaci&oacute;n de congeladores horizontales y verticales</span></div>
-          <div class="mini-card"><i class="fas fa-snowflake"></i><strong>M&aacute;quinas de hielo</strong><span>Mantenimiento y reparaci&oacute;n de m&aacute;quinas de hielo industrial</span></div>
-          <div class="mini-card"><i class="fas fa-gauge"></i><strong>Control de temperatura</strong><span>Instalaci&oacute;n y calibraci&oacute;n de termostatos y controles</span></div>
+          <div class="mini-card"><i class="fas fa-store"></i><strong>Vitrinas exhibidoras</strong><span>Reparación y mantenimiento de vitrinas y cámaras</span></div>
+          <div class="mini-card"><i class="fas fa-cubes"></i><strong>Congeladores comerciales</strong><span>Diagnóstico de congeladores horizontales y verticales</span></div>
+          <div class="mini-card"><i class="fas fa-snowflake"></i><strong>Máquinas de hielo</strong><span>Mantenimiento y reparación de máquinas industriales</span></div>
+          <div class="mini-card"><i class="fas fa-gauge"></i><strong>Control de temperatura</strong><span>Instalación y calibración de termostatos y controles</span></div>
         </div>
-        <a href="https://wa.me/50498481179?text=Hola%20FixYa,%20necesito%20servicio%20de%20refrigeraci%C3%B3n%20comercial" class="cat-wa" target="_blank">
+        <a href="https://wa.me/50498481179?text=Hola%20FixYa%2C%20necesito%20servicio%20de%20refrigeraci%C3%B3n%20comercial" class="cat-wa" target="_blank">
           <i class="fab fa-whatsapp"></i> Solicitar este servicio
         </a>
       </div>
-      <div class="cat-img gr-teal">
-        <i class="fas fa-store cat-bg-icon"></i>
+      <div class="cat-img">
+        <img src="https://images.unsplash.com/photo-1604754742629-3e5728249d73?w=800&q=80&fit=crop" alt="Refrigeración comercial supermercado vitrinas" loading="lazy"/>
       </div>
     </div>
 
     <!-- CUARTOS FRÍOS -->
     <div class="cat-row" id="cuartos-frios">
-      <div class="cat-img gr-teal2">
-        <i class="fas fa-warehouse cat-bg-icon"></i>
+      <div class="cat-img">
+        <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=800&q=80&fit=crop" alt="Cuartos fríos instalación industrial" loading="lazy"/>
       </div>
       <div class="cat-info">
         <span class="cat-tag tag-on"><i class="fas fa-check-circle"></i> Disponible ahora</span>
-        <h2>Cuartos Fr&iacute;os</h2>
-        <p>Dise&ntilde;o, instalaci&oacute;n y mantenimiento de cuartos fr&iacute;os para la industria alimentaria, farmac&eacute;utica y log&iacute;stica. Para proyectos de gran escala, el Departamento de Ingenier&iacute;a FixYa se encarga de todo.</p>
+        <h2>Cuartos Fríos</h2>
+        <p>Diseño, instalación y mantenimiento de cuartos fríos para la industria alimentaria, farmacéutica y logística. Para proyectos de gran escala, el Departamento de Ingeniería FixYa se encarga de todo.</p>
         <div class="cat-cards">
-          <div class="mini-card"><i class="fas fa-drafting-compass"></i><strong>Dise&ntilde;o t&eacute;rmico</strong><span>C&aacute;lculo de carga t&eacute;rmica y selecci&oacute;n de equipos</span></div>
-          <div class="mini-card"><i class="fas fa-hammer"></i><strong>Instalaci&oacute;n llave en mano</strong><span>Paneles, sistema frigor&iacute;fico, puertas y control</span></div>
-          <div class="mini-card"><i class="fas fa-temperature-low"></i><strong>Control autom&aacute;tico</strong><span>Sistemas de monitoreo y control de temperatura</span></div>
-          <div class="mini-card"><i class="fas fa-wrench"></i><strong>Mantenimiento preventivo</strong><span>Contratos de mantenimiento para cuartos fr&iacute;os operativos</span></div>
+          <div class="mini-card"><i class="fas fa-drafting-compass"></i><strong>Diseño térmico</strong><span>Cálculo de carga térmica y selección de equipos</span></div>
+          <div class="mini-card"><i class="fas fa-hammer"></i><strong>Instalación llave en mano</strong><span>Paneles, sistema frigorífico, puertas y control</span></div>
+          <div class="mini-card"><i class="fas fa-temperature-low"></i><strong>Control automático</strong><span>Sistemas de monitoreo y control de temperatura</span></div>
+          <div class="mini-card"><i class="fas fa-wrench"></i><strong>Mantenimiento preventivo</strong><span>Contratos de mantenimiento para cuartos operativos</span></div>
         </div>
-        <a href="https://wa.me/50498481179?text=Hola%20FixYa,%20necesito%20informaci%C3%B3n%20sobre%20cuartos%20fr%C3%ADos" class="cat-wa" target="_blank">
+        <a href="https://wa.me/50498481179?text=Hola%20FixYa%2C%20necesito%20información%20sobre%20cuartos%20fríos" class="cat-wa" target="_blank">
           <i class="fab fa-whatsapp"></i> Solicitar este servicio
         </a>
       </div>
     </div>
 
-  </div><!-- /container -->
-</section><!-- /servicios disponibles -->
+  </div>
+</section>
 
-<!-- INGENIERÍA FIXYAHN — SECCIÓN SEPARADA Y BIEN ESTRUCTURADA -->
+<!-- ═══ INSTALACIONES ELÉCTRICAS ═══ -->
+<div class="elec-header">
+  <div class="container">
+    <span class="sec-label" style="background:rgba(245,158,11,.2);color:#F59E0B"><i class="fas fa-bolt"></i> Nuevo servicio</span>
+    <h2 style="font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:900;color:#fff;letter-spacing:-.5px;margin-bottom:.8rem">Instalaciones Eléctricas</h2>
+    <p style="color:rgba(255,255,255,.65);font-size:1rem;line-height:1.75;max-width:680px">Técnicos especializados en instalaciones eléctricas residenciales, comerciales e industriales. Trabajos certificados, seguros y con garantía en toda Tegucigalpa.</p>
+  </div>
+</div>
+
+<section class="sec sec-alt" id="electricidad">
+  <div class="container">
+
+    <!-- INSTALACIONES ELÉCTRICAS RESIDENCIAL / COMERCIAL -->
+    <div class="cat-row" style="margin-top:1rem">
+      <div class="cat-img">
+        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80&fit=crop" alt="Instalaciones eléctricas residencial y comercial" loading="lazy"/>
+      </div>
+      <div class="cat-info">
+        <span class="cat-tag tag-elec"><i class="fas fa-bolt"></i> Disponible ahora</span>
+        <h2>Instalaciones Eléctricas</h2>
+        <p>Instalaciones eléctricas completas para viviendas, locales comerciales y plantas industriales. Desde una toma nueva hasta el cableado completo de un edificio.</p>
+        <div class="cat-cards">
+          <div class="mini-card mini-card-elec"><i class="fas fa-home"></i><strong>Instalaciones residenciales</strong><span>Cableado, tomas, interruptores y tableros en hogares</span></div>
+          <div class="mini-card mini-card-elec"><i class="fas fa-building"></i><strong>Instalaciones comerciales</strong><span>Oficinas, locales y centros comerciales</span></div>
+          <div class="mini-card mini-card-elec"><i class="fas fa-industry"></i><strong>Instalaciones industriales</strong><span>Plantas, bodegas y naves industriales</span></div>
+          <div class="mini-card mini-card-elec"><i class="fas fa-lightbulb"></i><strong>Iluminación y automatización</strong><span>Sistemas LED, sensores y control automático</span></div>
+        </div>
+        <a href="https://wa.me/50498481179?text=Hola%20FixYa%2C%20necesito%20servicio%20de%20instalaci%C3%B3n%20el%C3%A9ctrica" class="cat-wa cat-wa-elec" target="_blank">
+          <i class="fab fa-whatsapp"></i> Solicitar este servicio
+        </a>
+      </div>
+    </div>
+
+    <!-- TABLEROS Y PANELES -->
+    <div class="cat-row" id="tableros">
+      <div class="cat-info">
+        <span class="cat-tag tag-elec"><i class="fas fa-bolt"></i> Disponible ahora</span>
+        <h2>Tableros, Paneles y Protecciones</h2>
+        <p>Instalación, revisión y reparación de tableros eléctricos, paneles de distribución y sistemas de protección. Trabajos seguros con materiales certificados.</p>
+        <div class="cat-cards">
+          <div class="mini-card mini-card-elec"><i class="fas fa-server"></i><strong>Tableros de distribución</strong><span>Instalación y montaje de tableros residenciales e industriales</span></div>
+          <div class="mini-card mini-card-elec"><i class="fas fa-shield-alt"></i><strong>Sistemas de protección</strong><span>Breakers, fusibles, protectores de voltaje y tierra</span></div>
+          <div class="mini-card mini-card-elec"><i class="fas fa-search"></i><strong>Estudios termográficos</strong><span>Detección de puntos calientes y fallas en tableros</span></div>
+          <div class="mini-card mini-card-elec"><i class="fas fa-network-wired"></i><strong>Red de tierra y pararrayos</strong><span>Diseño y construcción de sistemas de protección a tierra</span></div>
+        </div>
+        <a href="https://wa.me/50498481179?text=Hola%20FixYa%2C%20necesito%20servicio%20de%20tableros%20el%C3%A9ctricos" class="cat-wa cat-wa-elec" target="_blank">
+          <i class="fab fa-whatsapp"></i> Solicitar este servicio
+        </a>
+      </div>
+      <div class="cat-img">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop" alt="Tableros eléctricos paneles instalación" loading="lazy"/>
+      </div>
+    </div>
+
+    <!-- GRUPOS ELECTRÓGENOS Y SISTEMAS FOTOVOLTAICOS -->
+    <div class="cat-row" id="generadores">
+      <div class="cat-img">
+        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80&fit=crop" alt="Sistemas fotovoltaicos paneles solares instalación" loading="lazy"/>
+      </div>
+      <div class="cat-info">
+        <span class="cat-tag tag-elec"><i class="fas fa-bolt"></i> Disponible ahora</span>
+        <h2>Generadores y Sistemas Solares</h2>
+        <p>Instalación y mantenimiento de grupos electrógenos para respaldo de energía. Diseño y montaje de sistemas fotovoltaicos para reducir tu consumo eléctrico.</p>
+        <div class="cat-cards">
+          <div class="mini-card mini-card-elec"><i class="fas fa-plug"></i><strong>Grupos electrógenos</strong><span>Instalación y mantenimiento de plantas de emergencia</span></div>
+          <div class="mini-card mini-card-elec"><i class="fas fa-solar-panel"></i><strong>Sistemas fotovoltaicos</strong><span>Diseño, montaje y mantenimiento de paneles solares</span></div>
+          <div class="mini-card mini-card-elec"><i class="fas fa-bolt"></i><strong>Transferencia automática</strong><span>Tableros ATS para cambio automático entre red y generador</span></div>
+          <div class="mini-card mini-card-elec"><i class="fas fa-chart-line"></i><strong>Calidad de energía</strong><span>Estudio y corrección de factor de potencia y armónicos</span></div>
+        </div>
+        <a href="https://wa.me/50498481179?text=Hola%20FixYa%2C%20necesito%20información%20sobre%20generadores%20o%20paneles%20solares" class="cat-wa cat-wa-elec" target="_blank">
+          <i class="fab fa-whatsapp"></i> Solicitar este servicio
+        </a>
+      </div>
+    </div>
+
+    <!-- SISTEMAS CONTRA INCENDIOS -->
+    <div class="cat-row" id="incendios">
+      <div class="cat-info">
+        <span class="cat-tag tag-elec"><i class="fas fa-bolt"></i> Disponible ahora</span>
+        <h2>Sistemas Contra Incendios y Alarmas</h2>
+        <p>Diseño e instalación de sistemas de detección y supresión de incendios para empresas, bodegas y edificios. Cumplimiento con normas NFPA.</p>
+        <div class="cat-cards">
+          <div class="mini-card mini-card-elec"><i class="fas fa-fire-extinguisher"></i><strong>Sistemas contra incendios</strong><span>Diseño e instalación de rociadores y tuberías de supresión</span></div>
+          <div class="mini-card mini-card-elec"><i class="fas fa-bell"></i><strong>Alarmas y detectores</strong><span>Detectores de humo, calor y sistemas de alarma centralizada</span></div>
+          <div class="mini-card mini-card-elec"><i class="fas fa-network-wired"></i><strong>Redes de voz y datos</strong><span>Tendido de redes estructuradas y cableado de comunicaciones</span></div>
+          <div class="mini-card mini-card-elec"><i class="fas fa-wrench"></i><strong>Mantenimiento eléctrico</strong><span>Contratos de mantenimiento preventivo para instalaciones</span></div>
+        </div>
+        <a href="https://wa.me/50498481179?text=Hola%20FixYa%2C%20necesito%20información%20sobre%20sistemas%20contra%20incendios" class="cat-wa cat-wa-elec" target="_blank">
+          <i class="fab fa-whatsapp"></i> Solicitar este servicio
+        </a>
+      </div>
+      <div class="cat-img">
+        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80&fit=crop" alt="Sistema contra incendios instalación" loading="lazy"/>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- INGENIERÍA -->
 <section style="background:linear-gradient(135deg,#050E1F,#0D2444);padding:5.5rem 5%">
   <div style="max-width:1200px;margin:0 auto">
     <span style="display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.12);color:rgba(255,255,255,.9);padding:.35rem .9rem;border-radius:50px;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem"><i class="fas fa-hard-hat"></i> Ingenier&iacute;a FixYa</span>
-    <h2 style="font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:900;color:#fff;letter-spacing:-.5px;margin-bottom:.8rem">Proyectos t&eacute;cnicos<br/>de gran escala</h2>
-    <p style="color:rgba(255,255,255,.65);font-size:1rem;line-height:1.75;max-width:620px;margin-bottom:3rem">Para proyectos que requieren ingenier&iacute;a, dise&ntilde;o y ejecuci&oacute;n profesional. Instalaciones industriales, cuartos fr&iacute;os de gran escala y proyectos llave en mano.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:3rem">
-      <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:2rem">
-        <div style="width:54px;height:54px;border-radius:14px;background:rgba(245,166,35,.2);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem"><i class="fas fa-building" style="color:#F5A623;font-size:1.3rem"></i></div>
-        <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.5rem">Instalaciones Industriales A/C</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.6">Sistemas centralizados, manejadoras, VRF multi-zona para plantas, bodegas y edificios.</p>
+    <h2 style="font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:900;color:#fff;letter-spacing:-.5px;margin-bottom:.8rem">Proyectos grandes.<br/>Refrigeración y Electricidad.</h2>
+    <p style="color:rgba(255,255,255,.65);font-size:1rem;line-height:1.75;max-width:680px;margin-bottom:3rem">Cuando el proyecto requiere ingeniería, diseño formal y ejecución a gran escala, entra el Departamento de Ingeniería FixYa. Cubrimos ambas áreas: sistemas de frío industriales e instalaciones eléctricas de alta complejidad.</p>
+
+    <!-- DOS COLUMNAS: REFRIGERACIÓN + ELECTRICIDAD -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem">
+
+      <!-- COLUMNA REFRIGERACIÓN -->
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:2rem">
+        <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid rgba(255,255,255,.1)">
+          <div style="width:48px;height:48px;border-radius:12px;background:rgba(37,99,235,.3);display:flex;align-items:center;justify-content:center"><i class="fas fa-snowflake" style="color:#60A5FA;font-size:1.2rem"></i></div>
+          <h3 style="font-size:1.1rem;font-weight:800;color:#fff">Proyectos de Refrigeración</h3>
+        </div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem">
+          <li style="display:flex;align-items:flex-start;gap:.7rem"><i class="fas fa-check-circle" style="color:#60A5FA;margin-top:.2rem;flex-shrink:0"></i><span style="font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.5">Instalaciones industriales A/C — VRF, Chiller, manejadoras de gran capacidad</span></li>
+          <li style="display:flex;align-items:flex-start;gap:.7rem"><i class="fas fa-check-circle" style="color:#60A5FA;margin-top:.2rem;flex-shrink:0"></i><span style="font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.5">Cuartos fríos y cámaras frigoríficas de gran escala — industria alimentaria y farmacéutica</span></li>
+          <li style="display:flex;align-items:flex-start;gap:.7rem"><i class="fas fa-check-circle" style="color:#60A5FA;margin-top:.2rem;flex-shrink:0"></i><span style="font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.5">Refrigeración comercial para cadenas de supermercados y centros de distribución</span></li>
+          <li style="display:flex;align-items:flex-start;gap:.7rem"><i class="fas fa-check-circle" style="color:#60A5FA;margin-top:.2rem;flex-shrink:0"></i><span style="font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.5">Diseño de sistemas HVAC con cálculo de carga térmica y planos</span></li>
+        </ul>
       </div>
-      <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:2rem">
-        <div style="width:54px;height:54px;border-radius:14px;background:rgba(245,166,35,.2);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem"><i class="fas fa-warehouse" style="color:#F5A623;font-size:1.3rem"></i></div>
-        <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.5rem">Cuartos Fr&iacute;os Gran Escala</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.6">C&aacute;maras de refrigeraci&oacute;n y congelaci&oacute;n para industria alimentaria, farmac&eacute;utica y log&iacute;stica.</p>
-      </div>
-      <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:2rem">
-        <div style="width:54px;height:54px;border-radius:14px;background:rgba(245,166,35,.2);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem"><i class="fas fa-project-diagram" style="color:#F5A623;font-size:1.3rem"></i></div>
-        <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.5rem">Proyectos Llave en Mano</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.6">Levantamiento, dise&ntilde;o, materiales, instalaci&oacute;n y entrega. T&uacute; solo apruebas el resultado.</p>
+
+      <!-- COLUMNA ELECTRICIDAD -->
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:2rem">
+        <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid rgba(255,255,255,.1)">
+          <div style="width:48px;height:48px;border-radius:12px;background:rgba(245,158,11,.25);display:flex;align-items:center;justify-content:center"><i class="fas fa-bolt" style="color:#F59E0B;font-size:1.2rem"></i></div>
+          <h3 style="font-size:1.1rem;font-weight:800;color:#fff">Proyectos Eléctricos</h3>
+        </div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem">
+          <li style="display:flex;align-items:flex-start;gap:.7rem"><i class="fas fa-check-circle" style="color:#F59E0B;margin-top:.2rem;flex-shrink:0"></i><span style="font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.5">Instalaciones eléctricas industriales y comerciales completas — diseño y ejecución</span></li>
+          <li style="display:flex;align-items:flex-start;gap:.7rem"><i class="fas fa-check-circle" style="color:#F59E0B;margin-top:.2rem;flex-shrink:0"></i><span style="font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.5">Montaje de líneas primarias, secundarias y sistemas de alumbrado industrial</span></li>
+          <li style="display:flex;align-items:flex-start;gap:.7rem"><i class="fas fa-check-circle" style="color:#F59E0B;margin-top:.2rem;flex-shrink:0"></i><span style="font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.5">Sistemas fotovoltaicos a gran escala y grupos electrógenos industriales</span></li>
+          <li style="display:flex;align-items:flex-start;gap:.7rem"><i class="fas fa-check-circle" style="color:#F59E0B;margin-top:.2rem;flex-shrink:0"></i><span style="font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.5">Sistemas contra incendios, alarmas y redes de voz/datos para edificios</span></li>
+        </ul>
       </div>
     </div>
-    <div style="text-align:center">
+
+    <div style="text-align:center;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
       <a href="ingenieria.html" style="display:inline-flex;align-items:center;gap:.6rem;background:#F5A623;color:#0F172A;padding:1rem 2.5rem;border-radius:50px;font-weight:800;font-size:1rem;text-decoration:none">
         <i class="fas fa-hard-hat"></i> Ver Departamento de Ingenier&iacute;a
+      </a>
+      <a href="https://wa.me/50498481179?text=Hola%20FixYa%2C%20tengo%20un%20proyecto%20grande%20y%20quiero%20una%20cotizaci%C3%B3n" target="_blank" style="display:inline-flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:1rem 2.5rem;border-radius:50px;font-weight:700;font-size:1rem;text-decoration:none">
+        <i class="fab fa-whatsapp"></i> Cotizar un proyecto
       </a>
     </div>
   </div>
 </section>
 
 <footer style="background:#0F172A;padding:4rem 5% 2rem">
-  <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1200px;margin:0 auto">
-    <div>
+  <div class="footer-inner">
+    <div class="footer-brand">
       <a href="index.html" style="text-decoration:none;display:inline-flex;margin-bottom:.6rem"><span style="font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-1px">Fix</span><span style="font-size:1.5rem;font-weight:900;color:#F5A623;letter-spacing:-1px">Ya</span></a>
-      <p style="font-size:.88rem;color:rgba(255,255,255,.55);margin-top:.8rem;line-height:1.7;max-width:260px">Especialistas en climatizaci&oacute;n y refrigeraci&oacute;n en Tegucigalpa. T&eacute;cnicos verificados, precios transparentes.</p>
-      <div style="display:flex;gap:.7rem;margin-top:1.2rem">
-        <a href="#" aria-label="Facebook" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" aria-label="Instagram" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i class="fab fa-instagram"></i></a>
-        <a href="https://wa.me/50498481179" target="_blank" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i class="fab fa-whatsapp"></i></a>
+      <p>Especialistas en climatización, refrigeración e instalaciones eléctricas en Tegucigalpa. Técnicos verificados.</p>
+      <div class="social">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/50498481179" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
-    <div>
-      <h4 style="color:#fff;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.2rem">Servicios</h4>
-      <ul style="list-style:none">
-        <li style="margin-bottom:.55rem"><a href="#ac-residencial" style="color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem">A/C Residencial</a></li>
-        <li style="margin-bottom:.55rem"><a href="#ac-comercial" style="color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem">A/C Comercial</a></li>
-        <li style="margin-bottom:.55rem"><a href="#refrig-domestica" style="color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem">Refrigeraci&oacute;n Dom&eacute;stica</a></li>
-        <li style="margin-bottom:.55rem"><a href="#refrig-comercial" style="color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem">Refrigeraci&oacute;n Comercial</a></li>
-        <li style="margin-bottom:.55rem"><a href="#cuartos-frios" style="color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem">Cuartos Fr&iacute;os</a></li>
-        <li><a href="ingenieria.html" style="color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem">Ingenier&iacute;a & Proyectos</a></li>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#ac-residencial">A/C Residencial</a></li>
+        <li><a href="#ac-comercial">A/C Comercial</a></li>
+        <li><a href="#refrig-domestica">Refrigeración Doméstica</a></li>
+        <li><a href="#refrig-comercial">Refrigeración Comercial</a></li>
+        <li><a href="#cuartos-frios">Cuartos Fríos</a></li>
+        <li><a href="#electricidad">Instalaciones Eléctricas</a></li>
+        <li><a href="ingenieria.html">Ingeniería & Proyectos</a></li>
       </ul>
     </div>
-    <div>
-      <h4 style="color:#fff;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.2rem">Empresa</h4>
-      <ul style="list-style:none">
-        <li style="margin-bottom:.55rem"><a href="nosotros.html" style="color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem">Qui&eacute;nes somos</a></li>
-        <li style="margin-bottom:.55rem"><a href="ingenieria.html" style="color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem">Ingenier&iacute;a FixYa</a></li>
-        <li><a href="contacto.html" style="color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem">Contacto</a></li>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="nosotros.html">Quiénes somos</a></li>
+        <li><a href="ingenieria.html">Ingeniería FixYa</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
       </ul>
     </div>
-    <div>
-      <h4 style="color:#fff;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.2rem">Contacto</h4>
-      <ul style="list-style:none">
-        <li style="margin-bottom:.55rem"><a href="https://wa.me/50498481179" target="_blank" style="color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem"><i class="fab fa-whatsapp"></i> +504 9848-1179</a></li>
-        <li style="margin-bottom:.55rem"><a href="mailto:infofixya@fixyahn.com" style="color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem"><i class="fas fa-envelope"></i> infofixya@fixyahn.com</a></li>
-        <li style="margin-bottom:.55rem"><a href="mailto:ingenieria@fixyahn.com" style="color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem"><i class="fas fa-hard-hat"></i> Ingenier&iacute;a</a></li>
-        <li><a href="#" style="color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem">Tegucigalpa, Honduras</a></li>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/50498481179" target="_blank"><i class="fab fa-whatsapp"></i> +504 9848-1179</a></li>
+        <li><a href="mailto:infofixya@fixyahn.com"><i class="fas fa-envelope"></i> infofixya@fixyahn.com</a></li>
+        <li><a href="mailto:ingenieria@fixyahn.com"><i class="fas fa-hard-hat"></i> Ingeniería</a></li>
+        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Tegucigalpa, HN</a></li>
       </ul>
     </div>
   </div>
-  <div style="max-width:1200px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.8rem;color:rgba(255,255,255,.4)">
+  <div class="footer-bottom">
     <span>&copy; 2025 FixYa. Todos los derechos reservados.</span>
     <span>Tegucigalpa, Honduras</span>
   </div>
 </footer>
+
 <script>
-
-
-window.addEventListener('scroll',function(){var nav=document.getElementById('navbar');if(nav)nav.classList.toggle('scrolled',window.scrollY>30)});
-
-  
-
-  
+window.addEventListener('scroll',function(){
+  var nav=document.getElementById('navbar');
+  if(nav) nav.classList.toggle('scrolled',window.scrollY>30);
+});
+</script>
+</body>
+</html>
